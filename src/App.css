@@ -43,7 +43,7 @@
   padding: 1em;
 margin-bottom: 1em;
 border: 1px solid #eee;
-background-color: #c09dc0;
+background-color: #0d87b629;
 box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 border-radius: 5%;
 width: 400px;
@@ -51,4 +51,88 @@ width: 400px;
 input{
   border-radius: 60%;
   box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+}
+.about{
+  background-color: #61dafb;
+}
+#navs{
+  background-image: linear-gradient(106deg, #dbf3c1, #1aea8e);
+}
+/* .mainf{
+  border: 1px solid #eee;
+background-color: #0d87b629;
+box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+border-radius: 2%;
+} */
+td, th { border: 1px solid #01436e; 
+ height: 45px; 
+}
+table {
+  border: 1px solid #d6f4c4;
+  background-color: #30c58f4f;
+  box-shadow: 0 3px 4px rgba(232, 221, 221, 0.25);
+  width: 100%;
+  color: #dbf3c1;
+}
+.tabl{
+}
+.circstat{
+  border: 1px solid #eee;
+background-color: #ffffff;
+box-shadow: 0 0 10px rgb(5 241 180);
+height: 200px;
+text-align: center;
+margin: 5px;
+padding: 90px;
+border-radius: 50%  10%;
+margin-top: 5px;
+text-decoration: none;
+}
+.circstat:hover{
+  background-color: #e3aefd89;
+}
+#circbox{
+  margin-left: 2px;
+}
+.mycal{
+  border: 1px solid #eee;
+background-color: #1b264663;
+box-shadow: 0 4px 4px rgba(251, 248, 248, 0.715);
+/* border-radius: 10%; */
+text-align: center;
+margin: 20px;
+height: 70px;
+}
+.mycalback{
+  border: 1px solid #eee;
+  background-color: #30c58f4f;
+  box-shadow: 0 3px 4px rgba(232, 221, 221, 0.25);
+/* border-radius: 5%; */
+height: fit-content;
+text-align: center;
+color: #dbf3c1;
+margin-top:40px ;
+}
+.chartstat{
+  width: 100%;
+  height: 40vh;
+  background-color: #ffffff;
+  /* box-shadow: inset 4px 4px 4px rgba(3, 132, 244, 0.725); */
+  margin: 10px;
+}
+#mycalmonth{
+  border: 1px solid #eee;
+background-color: #1b264663;
+box-shadow: 0 4px 4px rgba(251, 248, 248, 0.715);
+/* border-radius: 10%; */
+text-align: center;
+margin: 20px;
+height: 60px;
+
+}
+.eraser{
+  margin: 2px;
+}
+a{
+  text-decoration: none;
 }

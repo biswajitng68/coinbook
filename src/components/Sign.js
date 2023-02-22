@@ -1,4 +1,4 @@
-import './App.css';
+import '../App.css';
 import {Outlet, Link ,useNavigate} from "react-router-dom";
 import { useState } from 'react';
 function Sign() {

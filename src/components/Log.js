@@ -1,4 +1,4 @@
-import './App.css';
+import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState} from 'react';
 
@@ -20,7 +20,9 @@ function Log() {
         console.log(json);
         if (json.success){
             // Save the auth token and redirect
+            localStorage.setItem("token",json.authtoken);
             alert("succes");
+            navigate("main");
 
         }
         else{

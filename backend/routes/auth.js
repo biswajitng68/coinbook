@@ -1,10 +1,11 @@
 const express=require("express");
 const router = express.Router();
 const User=require("../models/User");
+var jwt=require("jsonwebtoken")
 // const cors=require("cors");
 // const app=express
 
-
+ const JWT_SECRET = 'Biswa#12545nag@123';
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 router.post('/sign', async (req, res) => {
   // If there are errors, return Bad request and the errors
@@ -54,8 +55,9 @@ router.post('/login',  async (req, res) => {
       }
   
       //
+      const authtoken=jwt.sign(user.id,JWT_SECRET);
       success = true;
-      res.json({ success})
+      res.json({ success,authtoken})
   
     } catch (error) {
       console.error(error.message);

@@ -1,19 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import Log from './Log';
-import Sign from './Sign';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Log from './components/Log';
+import Sign from './components/Sign';
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import Home from './components/Home';
+import About from './components/About';
+import Main from './components/Main';
+import Yearstat from './components/Yearstat';
+import Monthstat from './components/Monthstat';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
+        <Route element={<App/>}>
+      <Route path="home" element={<Home />}/>
+       <Route path="main" element={<Main />}/>
         <Route path="/" element={<Log />}/>
         <Route path="sign" element={<Sign />} />
+        <Route path="about" element={<About />} />
+        <Route path="year" element={<Yearstat />} />
+        <Route path="month" element={<Monthstat />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
