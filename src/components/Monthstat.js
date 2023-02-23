@@ -5,8 +5,16 @@ import Chart from "chart.js/auto";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 function Monthstat() {
+  var date=new Date();
+  var month = date.getMonth()+1;
+  var year = date.getFullYear();
+  var totalday=daysInMonth(month,year);
+  function daysInMonth (month, year) {
+    return new Date(year, month, 0).getDate();
+}
+  console.log(totalday);
     var labels = [];
-    for (let index = 0; index < 30; index++) {
+    for (let index = 0; index < totalday; index++) {
         labels[index] = "Day"+(index+1);
         
     }

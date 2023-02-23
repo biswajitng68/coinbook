@@ -1,7 +1,6 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState} from 'react';
-import homeim from '../back.png';
 
 function Main() {
   var textcolor={
@@ -32,7 +31,12 @@ function Main() {
          </div>
        </div>
      </div>
-     <div class="d-grid  col-6 mx-auto my-3">
+     <div className="form-floating my-3">
+           <input type="text" className="form-control" id="floatingInputGrid"  />
+           <label for="floatingInputGrid">Expense details</label>
+         </div>
+     <div class="d-grid col-6 mx-auto my-3">
+     
   <button class="btn btn-info" type="button">Add</button>
 </div>
 <h3 style={textcolor}> Today's expense sheet</h3>
@@ -40,32 +44,22 @@ function Main() {
      <table >
         <tr>
         <th>Expense type</th>
+        <th>Expense details</th>
         <th>Expense</th>
         </tr>
-        <tr>
+        {(() => {
+        let rows = [];
+        for (let i = 0; i < 5; i++) {
+          rows.push(<tr key={i}>
         <td>Travel expense</td>
+        <td>The insurance industry is expanding quickly alongside the digital transformation in banking and business.The insurance industry is expanding quickly alongside the digital transformation in banking and business.</td>
         <td>120</td>
         </tr>
-        <tr>
-        <td>Food expense</td>
-        <td>400</td>
-        </tr>
-        <tr>
-        <td>General expense</td>
-        <td>400</td>
-        </tr>
-        <tr>
-        <td>Travel expense</td>
-        <td>120</td>
-        </tr>
-        <tr>
-        <td>Food expense</td>
-        <td>400</td>
-        </tr>
-        <tr>
-        <td>General expense</td>
-        <td>400</td>
-        </tr>
+            );
+        }
+        return rows;
+      })()}
+        
         <tr>
         <th>Total expense</th>
         <th>400</th>
