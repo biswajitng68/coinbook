@@ -116,7 +116,8 @@ box-shadow: 0 4px 4px rgba(251, 248, 248, 0.715);
 text-align: center;
 margin: 20px;
 height: 60px;
-
+min-width: 80px;
+max-width: fit-content;
 }
 .eraser{
   margin: 2px;

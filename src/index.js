@@ -11,6 +11,7 @@ import About from './components/About';
 import Main from './components/Main';
 import Yearstat from './components/Yearstat';
 import Monthstat from './components/Monthstat';
+import History from './components/History';
 
 
 
@@ -27,6 +28,7 @@ root.render(
         <Route path="about" element={<About />} />
         <Route path="year" element={<Yearstat />} />
         <Route path="month" element={<Monthstat />} />
+        <Route path="history" element={<History />} />
         </Route>
       </Routes>
     </BrowserRouter>

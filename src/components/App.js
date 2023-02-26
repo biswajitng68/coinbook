@@ -26,6 +26,9 @@ navigate("home");
         <li className="nav-item mx-3">
           <Link className="nav-Link" to="/about"><button className='btn btn-dark'>About</button></Link>
         </li>
+        {localStorage.getItem("token")?<li className="nav-item">
+          <Link className="nav-Link active" aria-current="page" to="/history"><button className='btn btn-dark'>History</button></Link>
+        </li>:<p></p>}
       </ul>
       {!localStorage.getItem("token")?<Link className="nav-Link" to="/"><button className='btn btn-dark'>Log in</button></Link>:<button className='btn btn-dark' onClick={logout}>log out</button>}
     </div>

@@ -1,14 +1,44 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Chart from "chart.js/auto";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 function Monthstat() {
   var date=new Date();
-  var month = date.getMonth()+1;
-  var year = date.getFullYear();
-  var totalday=daysInMonth(month,year);
+  var totalday=daysInMonth(date.getMonth()+1,date.getFullYear());
+
+  var month=date.getMonth().toString();
+  var year=date.getFullYear().toString();
+  var day=date.getDate().toString();
+  const [modetail,setmodetail]=useState([]);
+  useEffect(() => {
+    fetchmoData();
+
+  },[]);  
+
+  async function fetchmoData() {
+    const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Monthly", {
+   method: 'POST',
+   headers: {
+       'Content-Type': 'application/json'
+   },
+   
+   body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
+  });
+  const json = await response.json()
+  let j=0;
+  let exar=[]
+  for(let i=0;i<totalday;i++){
+    if(j<json.length&&(i==parseInt(json[j]._id)))
+    {exar[i]=json[j].sum;
+    j++;}
+    else
+    {exar[i]=0;}
+  }
+ setmodetail(exar);
+  }
+
   function daysInMonth (month, year) {
     return new Date(year, month, 0).getDate();
 }
@@ -22,10 +52,10 @@ function Monthstat() {
       labels: labels,
       datasets: [
         {
-          label: "My First dataset",
+          label: "expense vs day",
           backgroundColor: "rgb(25, 99, 132)",
           borderColor: "rgb(155, 199, 132)",
-          data: [3, 10, 5, 2, 20, 30, 45,52,20,30,10],
+          data: modetail,
         },
       ],
     };
@@ -36,11 +66,21 @@ function Monthstat() {
             <div className='col mycalback rounded'>
               <h3>Your monthy expense stat</h3>
                 <div className='row'>
-                {labels.map((month, index) => (
+                {/* {labels.map((month, index) => (
         <div className='col-md-2' key={index}>
           <div className='mycal rounded' id='mycalmonth'><p className='eraser'>{month}</p><p className='eraser'>1000Rs</p></div>
         </div>
-      ))}
+      ))} */}
+      {(() => {
+        let rows = [];
+        for (let i = 0; i < modetail.length; i++) {
+          rows.push(<div className='col-md-2' key={i}>
+          <div className='mycal rounded' id='mycalmonth'><p className='eraser'>{labels[i]}</p><p className='eraser'>{modetail[i]}Rs</p></div>
+        </div>
+            );
+        }
+        return rows;
+      })()}
                 </div>
             </div>
         <div className='col'>
