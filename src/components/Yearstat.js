@@ -1,10 +1,12 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,} from 'react';
 import Chart from "chart.js/auto";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
+
 function Yearstat() {
+  let navigate = useNavigate();
   var date=new Date();
   var month=date.getMonth().toString();
   var year=date.getFullYear().toString();
@@ -37,6 +39,16 @@ function Yearstat() {
  setyrdetail(exar);
   }
 
+//going to particular month
+function gomonth(monthst){
+ if(monthst==="January")
+ {
+  console.log("hi");
+ }
+ console.log(monthst);
+navigate("../month")
+}
+
   const labels = ["January", "February", "March", "April", "May", "June","July","August","September","October","November","December"];
     const data = {
       labels: labels,
@@ -56,16 +68,11 @@ function Yearstat() {
             <div className='col mycalback rounded'>
               <h3>Your yearly expense stat</h3>
                 <div className='row'>
-                {/* {labels.map((month, index) => (
-        <div className='col-md-4' key={index}>
-          <div className='mycal rounded'><h5>{month}</h5><h4>10000Rs</h4></div>
-        </div>
-      ))} */}
        {(() => {
         let rows = [];
         for (let i = 0; i < yrdetail.length; i++) {
           rows.push(<div className='col-md-4' key={i}>
-          <div className='mycal rounded'><h5>{labels[i]}</h5><h4>{yrdetail[i]}</h4></div>
+          <div className='mycal rounded' onClick={()=>{ localStorage.setItem("mon",i);navigate("../month")}}><h5>{labels[i]}</h5><h4>{yrdetail[i]}</h4></div>
         </div>
             );
         }

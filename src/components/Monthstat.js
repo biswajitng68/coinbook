@@ -1,23 +1,33 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useRef} from 'react';
 import Chart from "chart.js/auto";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 function Monthstat() {
+  let navigate = useNavigate();
+  const dataFetchedRef = useRef(false);
+  const mon = localStorage.getItem("mon")
+  console.log(mon)
   var date=new Date();
-  var totalday=daysInMonth(date.getMonth()+1,date.getFullYear());
-
-  var month=date.getMonth().toString();
+  var totalday=daysInMonth(((!mon)?date.getMonth()+1:parseInt(mon)+1),date.getFullYear());
+  var month=!mon?date.getMonth().toString():mon.toString();
   var year=date.getFullYear().toString();
   var day=date.getDate().toString();
   const [modetail,setmodetail]=useState([]);
+  const [selmon,setmon]=useState();
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+      dataFetchedRef.current = true;
     fetchmoData();
-
+if(localStorage.getItem("mon")){
+  
+localStorage.removeItem("mon")}
   },[]);  
 
   async function fetchmoData() {
+    setmon(month)
+    console.log(selmon);
     const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Monthly", {
    method: 'POST',
    headers: {
@@ -30,7 +40,7 @@ function Monthstat() {
   let j=0;
   let exar=[]
   for(let i=0;i<totalday;i++){
-    if(j<json.length&&(i==parseInt(json[j]._id)))
+    if(j<json.length&&(i==parseInt(json[j]._id)-1))
     {exar[i]=json[j].sum;
     j++;}
     else
@@ -40,6 +50,7 @@ function Monthstat() {
   }
 
   function daysInMonth (month, year) {
+    console.log(month);
     return new Date(year, month, 0).getDate();
 }
   console.log(totalday);
@@ -64,7 +75,7 @@ function Monthstat() {
         {(localStorage.getItem("token"))?
         <div className='row mx-3 my-3'>
             <div className='col mycalback rounded'>
-              <h3>Your monthy expense stat</h3>
+              <h3>Your {selmon} month expense stat</h3>
                 <div className='row'>
                 {/* {labels.map((month, index) => (
         <div className='col-md-2' key={index}>
@@ -74,8 +85,9 @@ function Monthstat() {
       {(() => {
         let rows = [];
         for (let i = 0; i < modetail.length; i++) {
+          console.log(selmon);
           rows.push(<div className='col-md-2' key={i}>
-          <div className='mycal rounded' id='mycalmonth'><p className='eraser'>{labels[i]}</p><p className='eraser'>{modetail[i]}Rs</p></div>
+          <div className='mycal rounded' id='mycalmonth' onClick={()=>{localStorage.setItem("day",i+1);localStorage.setItem("mon",parseInt(selmon)+1);navigate("../history")}}><p className='eraser'>{labels[i]}</p><p className='eraser'>{modetail[i]}Rs</p></div>
         </div>
             );
         }

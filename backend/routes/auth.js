@@ -2,7 +2,7 @@ const express=require("express");
 const router = express.Router();
 const User=require("../models/Userupdate");
 var jwt=require("jsonwebtoken")
-
+var ObjectId = require("mongodb").ObjectID;
 
  const JWT_SECRET = 'Biswa#12545nag@123';
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
@@ -71,9 +71,9 @@ router.post('/login',  async (req, res) => {
 router.post("/add_User_Expense_Daily", async (req, res) => {
   try {
     const { token, year, month, day, field, value,info } = req.body;
-     console.log(req.body);
+    //  console.log(req.body);
      const email = jwt.verify(token, JWT_SECRET).email;
-    console.log(email);
+    // console.log(email);
     User.findOne(
       {
         email: email,
@@ -81,7 +81,7 @@ router.post("/add_User_Expense_Daily", async (req, res) => {
       },
       async (err, user) => {
         // console.log("2");
-         console.log(user);
+        //  console.log(user);
         if (user) {
           // console.log("3");
           User.updateOne(
@@ -239,7 +239,7 @@ router.post("/fetch_User_Expense_Sum_Yearly", async (req, res) => {
 router.post("/fetch_User_Expense_Details_Daily", async (req, res) => {
   try {
     const { token, year, month, day } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     const email = jwt.verify(token, JWT_SECRET).email;
 
     const f = User.aggregate([
@@ -252,7 +252,7 @@ router.post("/fetch_User_Expense_Details_Daily", async (req, res) => {
           "details.day": day,
         },
       },
-      { $project: { _id: 0, "details.expense": 1 } },
+      { $project: { _id: 0, "details.expense": 1,"details._id": 1 } },
     ]).exec((err, yearly_Expense) => {
       if (err) {
         console.log(err);
@@ -274,7 +274,7 @@ router.post("/fetch_User_Expense_Details_Monthly", async (req, res) => {
   try {
     const { token, year, month } = req.body;
     const email = jwt.verify(token, JWT_SECRET).email;
-    console.log(email);
+    // console.log(email);
     const f = User.aggregate([
       { $match: { email: email } },
       { $unwind: "$details" },
@@ -314,7 +314,7 @@ router.post("/fetch_User_Expense_Details_Yearly", async (req, res) => {
   try {
     const { token, year } = req.body;
      const email = jwt.verify(token, JWT_SECRET).email;
-     console.log(email);
+    //  console.log(email);
     const f = User.aggregate([
       { $match: { email: email } },
       { $unwind: "$details" },
@@ -340,6 +340,93 @@ router.post("/fetch_User_Expense_Details_Yearly", async (req, res) => {
   } catch (err) {
     res.send(err);
     // console.log(err);
+  }
+});
+
+//ROUTE-13:Update any particular Expense for any day
+router.post("/update_Any_User_Expense_", async (req, res) => {
+  try {
+    const { token, date_id, expense_id, new_field, new_value, new_info } =
+      req.body;
+    // console.log(req.body);
+    const email = jwt.verify(token, JWT_SECRET).email;
+    // console.log(email);
+
+    User.updateOne(
+      {
+        email:email,
+      },
+      {
+        $set: {
+          "details.$[i].expense.$[j].val": new_value,
+          "details.$[i].expense.$[j].type": new_field,
+          "details.$[i].expense.$[j].info": new_info,
+        },
+      },
+      {
+        arrayFilters: [
+          { "i._id": ObjectId(date_id) },
+          { "j._id": ObjectId(expense_id) },
+        ],
+      },
+      async (error, ans) => {
+        if (error) res.send(error);
+        else {
+          // console.log(ans);
+          if (ans.modifiedCount === 1) {
+            res.send({ message: "successfully stored", ans });
+          } else {
+            if (ans.matchedCount === 1) {
+              res.send({
+                message: "Kindly Provide Updated Expense Details",
+                ans,
+              });
+            } else {
+              res.send({ message: "Could not update", ans });
+            }
+          }
+        }
+      }
+    );
+  } catch (error) {
+    // console.log(error);
+    res.send({
+      message: "Some Error Occured\nExpense not updated",
+      error: error.message,
+    });
+  }
+});
+
+//ROUTE-14:Delete Expense for any day
+router.post("/delete_User_Expense", async (req, res) => {
+  try {
+    const { token, date_id, expense_id } = req.body;
+    console.log(req.body);
+    const email = jwt.verify(token, JWT_SECRET).email;
+    // console.log(_id);
+    User.updateOne(
+      {
+        email:email,
+      },
+      {
+        $pull: {
+          "details.$[i].expense": { _id: expense_id },
+        },
+      },
+      {
+        arrayFilters: [{ "i._id": ObjectId(date_id) }],
+      },
+      async (error, ans) => {
+        if (error)
+          res.send({ message: "Could not Delete", error: error.message });
+        else {
+          res.send({ message: "Deletyedc", ans });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
   }
 });
 

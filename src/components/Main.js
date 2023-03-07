@@ -16,6 +16,19 @@ const [expensedetail,setedetail]=useState([]);
 const [dsum,setdsum]=useState(0);
 const [ysum,setysum]=useState(0);
 const [msum,setmsum]=useState(0);
+const [ntype,setntype]=useState("");
+const [nval,setnval]=useState(0);
+const [ninfo,setninfo]=useState("");
+const onNewtypeChange=(e)=>{
+  setntype(e.target.value);
+  }
+  const onNewvalChange=(e)=>{
+    setnval(e.target.value);
+    }
+  const onNewinfoChange=(e)=>{
+      setninfo(e.target.value);
+      }
+
 useEffect(() => {
   if (dataFetchedRef.current) return;
       dataFetchedRef.current = true;
@@ -38,7 +51,7 @@ const json = await response.json()
 setdsum(json[0].sum);
 }
 //fetch monthly sum
-async function fetchdayData() {
+async function fetchmoData() {
   const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Sum_Monthly", {
  method: 'POST',
  headers: {
@@ -64,7 +77,7 @@ const json = await response.json()
 setysum(json[0].sum);
 }
 //fetch expense details
-async function fetchmoData() {
+async function fetchdayData() {
   const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Daily", {
  method: 'POST',
  headers: {
@@ -131,6 +144,7 @@ setedetail(json[0].details.expense);
      <div className='my-4 table tabl '>
      <table >
         <tr>
+          <th>Change</th>
         <th>Expense type</th>
         <th>Expense details</th>
         <th>Expense</th>
@@ -139,6 +153,13 @@ setedetail(json[0].details.expense);
         let rows = [];
         for (let i = 0; i < expensedetail.length; i++) {
           rows.push(<tr key={i}>
+            <td>
+            <button className='btn btn-dark' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
+                setntype(expensedetail[i].type);
+                setnval(expensedetail[i].val);
+                setninfo(expensedetail[i].info)}}>Edit</button>
+              <button className='btn btn-danger mx-2'>Delete</button>
+            </td>
         <td>{expensedetail[i].type}</td>
         <td>{expensedetail[i].info}</td>
         <td>{expensedetail[i].val}</td>
@@ -147,9 +168,37 @@ setedetail(json[0].details.expense);
         }
         return rows;
       })()}
-        
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id='mymodal'>
+      <div class="modal-header" >
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit expense</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div className='form-floating my-2'>
+            <input type="number" className="form-control" id="floatingInputGrid" onChange={onNewvalChange} name="nval" value={nval}/>
+           <label htmlFor="floatingInputGrid">Expense value</label>
+           </div>
+        <div className='form-floating my-2'>
+           <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}/>
+           <label htmlFor="floatingInputGrid">Expense type</label>
+           </div>
+        <div className='form-floating my-2'>
+           <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewinfoChange} name="ninfo" value={ninfo} />
+           <label  htmlFor="floatingInputGrid">Expense details</label>
+           </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
         <tr>
         <th>Total expense</th>
+        <th></th>
         <th></th>
         <th>{dsum}</th>
         </tr>

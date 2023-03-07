@@ -14,11 +14,11 @@ import Monthstat from './components/Monthstat';
 import History from './components/History';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
+
       <Routes>
         <Route element={<App/>}>
       <Route path="home" element={<Home />}/>
@@ -29,8 +29,10 @@ root.render(
         <Route path="year" element={<Yearstat />} />
         <Route path="month" element={<Monthstat />} />
         <Route path="history" element={<History />} />
+        
         </Route>
       </Routes>
+
     </BrowserRouter>
   </React.StrictMode>
 );

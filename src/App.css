@@ -125,3 +125,7 @@ max-width: fit-content;
 a{
   text-decoration: none;
 }
+#mymodal{
+  background-color: #5fceae9e;
+  color: #000;
+}
