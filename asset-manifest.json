@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/login/static/css/main.5fafc10f.css",
-    "main.js": "/login/static/js/main.61e247f3.js",
-    "static/js/787.28cb0dcd.chunk.js": "/login/static/js/787.28cb0dcd.chunk.js",
-    "static/media/back.png": "/login/static/media/back.1d49b091d2c858a21a72.png",
-    "index.html": "/login/index.html",
-    "main.5fafc10f.css.map": "/login/static/css/main.5fafc10f.css.map",
-    "main.61e247f3.js.map": "/login/static/js/main.61e247f3.js.map",
-    "787.28cb0dcd.chunk.js.map": "/login/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/coinbook/static/css/main.c11e7a23.css",
+    "main.js": "/coinbook/static/js/main.35cb5f2e.js",
+    "static/js/787.28cb0dcd.chunk.js": "/coinbook/static/js/787.28cb0dcd.chunk.js",
+    "static/media/back.png": "/coinbook/static/media/back.1d49b091d2c858a21a72.png",
+    "index.html": "/coinbook/index.html",
+    "main.c11e7a23.css.map": "/coinbook/static/css/main.c11e7a23.css.map",
+    "main.35cb5f2e.js.map": "/coinbook/static/js/main.35cb5f2e.js.map",
+    "787.28cb0dcd.chunk.js.map": "/coinbook/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5fafc10f.css",
-    "static/js/main.61e247f3.js"
+    "static/css/main.c11e7a23.css",
+    "static/js/main.35cb5f2e.js"
   ]
 }
