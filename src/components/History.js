@@ -17,8 +17,8 @@ const [expensedetail,setedetail]=useState([]);
 const [dsum,setdsum]=useState(0);
 const [ysum,setysum]=useState(0);
 const [msum,setmsum]=useState(0);
-const [expense, setExpnses] = useState({type: "", val:0,info:""}) 
-const [ntype,setntype]=useState("");
+const [expense, setExpnses] = useState({type: "General", val:0,info:""}) 
+const [ntype,setntype]=useState("General");
 const [nval,setnval]=useState(0);
 const [ninfo,setninfo]=useState("");
 const [dId,setdId]=useState("");
@@ -114,6 +114,9 @@ const expensehandleSubmit = async (e) => {
     const json = await response.json()
     console.log(json);
     handleSubmit(e);
+    fetchData();
+    fetchmoData();
+    fetchyrData();
 }
 
 //update particular expense
@@ -230,8 +233,13 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
        </div>
        <div className="col-md">
          <div className="form-floating">
-           <input type="text" className="form-control" id="floatingInputGrid" onChange={onexChange} name="type" value={expense.type}/>
-           <label htmlFor="floatingInputGrid">Expense type</label>
+           <select class="form-select" id="floatingInputGrid" onChange={onexChange} name="type" value={expense.type}>
+              <option value="General">Genral</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Others">Others</option>
+            </select>
+            <label  htmlFor="floatingInputGrid">Expense Type</label>
          </div>
        </div>
      </div>
@@ -313,8 +321,13 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
            <label htmlFor="floatingInputGrid">Expense value</label>
            </div>
         <div className='form-floating my-2'>
-           <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}/>
-           <label htmlFor="floatingInputGrid">Expense type</label>
+           <select class="form-select" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}>
+              <option value="General">Genral</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Others">Others</option>
+            </select>
+            <label  htmlFor="floatingInputGrid">Expense Type</label>
            </div>
         <div className='form-floating my-2'>
            <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewinfoChange} name="ninfo" value={ninfo} />

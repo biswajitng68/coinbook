@@ -2,7 +2,7 @@ import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useEffect, useState,} from 'react';
 import Chart from "chart.js/auto";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Bar, Line, Doughnut,Pie } from "react-chartjs-2";
 
 
 function Yearstat() {
@@ -12,11 +12,17 @@ function Yearstat() {
   var year=date.getFullYear().toString();
   var day=date.getDate().toString();
   const [yrdetail,setyrdetail]=useState([]);
+  var types=[];
+  var typesums=[];
+  var colortypes=["red","blue","yellow","brown","violet","blueviolet","royalblue","gold"]
+  const [typesst,settype]=useState([]);
+  const [typesumst,settypesum]=useState([]);
   useEffect(() => {
     fetchyerData();
-
+    typewiseyrdata();
   },[]);  
 
+//year data of epense monthsum
   async function fetchyerData() {
     const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Yearly", {
    method: 'POST',
@@ -39,15 +45,29 @@ function Yearstat() {
  setyrdetail(exar);
   }
 
-//going to particular month
-function gomonth(monthst){
- if(monthst==="January")
- {
-  console.log("hi");
- }
- console.log(monthst);
-navigate("../month")
+//typewise details fetch
+async function typewiseyrdata(){
+  const response = await fetch("http://localhost:5000/user/fetch_User_Expense_TypeWise_Yearly", {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    
+    body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
+   });
+   const json = await response.json()
+   console.log(json);
+   for(let i=0;i<json.length;i++){
+    if(json[i].sum>0){
+      types[i]=json[i]._id;
+      typesums[i]=json[i].sum;
+    }
+    settype(types);
+    settypesum(typesums);
+   }
 }
+
+
 
   const labels = ["January", "February", "March", "April", "May", "June","July","August","September","October","November","December"];
     const data = {
@@ -60,7 +80,32 @@ navigate("../month")
           data: yrdetail,
         },
       ],
-    };
+    }; 
+    console.log(typesst);
+    console.log(typesumst);
+    const datatypewise = {
+      labels: typesst,
+      datasets: [
+        {
+          label: "Typewise expenses",
+          backgroundColor: colortypes,
+          borderColor: "rgb(155, 199, 132)",
+          data: typesumst,
+        },
+      ],
+    }; 
+    const options = {
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          }
+        }
+      }
+
     return(
         <>
         {(localStorage.getItem("token"))?
@@ -82,7 +127,7 @@ navigate("../month")
             </div>
         <div className='col'>
           <div className='chartstat shadow-lg p-2 rounded'><Bar  data={data} /></div>
-          <div className='chartstat shadow-lg p-2  rounded'><Line  data={data} /></div>
+          <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options={options}  /></div></div>
         </div>
         </div>
        :

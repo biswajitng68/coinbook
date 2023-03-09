@@ -7,7 +7,7 @@ function Main() {
     color:"#dbf3c1"
   };
   const dataFetchedRef = useRef(false);
-  const [expense, setExpnses] = useState({type: "", val:0,info:""}) 
+  const [expense, setExpnses] = useState({type: "General", val:0,info:""}) 
 var date=new Date();
 var month=date.getMonth().toString();
 var year=date.getFullYear().toString();
@@ -16,9 +16,11 @@ const [expensedetail,setedetail]=useState([]);
 const [dsum,setdsum]=useState(0);
 const [ysum,setysum]=useState(0);
 const [msum,setmsum]=useState(0);
-const [ntype,setntype]=useState("");
+const [ntype,setntype]=useState("General");
 const [nval,setnval]=useState(0);
 const [ninfo,setninfo]=useState("");
+const [dId,setdId]=useState("");
+const [eid,seteid]=useState("");
 const onNewtypeChange=(e)=>{
   setntype(e.target.value);
   }
@@ -88,7 +90,46 @@ async function fetchdayData() {
 });
 const json = await response.json()
 setedetail(json[0].details.expense);
+setdId(json[0].details._id)
 }
+
+const updateexpense = async (e) => {
+  
+  const response = await fetch("http://localhost:5000/user/update_Any_User_Expense_", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      
+      body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid, new_field:ntype, new_value:nval, new_info:ninfo})
+  });
+  const json = await response.json()
+  console.log(json);
+  fetchData();
+  fetchmoData();
+  fetchyrData();
+  fetchdayData();
+}
+
+//delete particular expense
+const deleteexpense = async (exid) => {
+
+const response = await fetch("http://localhost:5000/user/delete_User_Expense", {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    
+    body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:exid})
+});
+const json = await response.json()
+console.log(json);
+fetchData();
+fetchmoData();
+fetchyrData();
+fetchdayData();
+}
+
 //add expense
     const handleSubmit = async (e) => {
       const value=expense.val
@@ -127,8 +168,13 @@ setedetail(json[0].details.expense);
        </div>
        <div className="col-md">
          <div className="form-floating">
-           <input type="text" className="form-control" id="floatingInputGrid" onChange={onChange} name="type" value={expense.type}/>
-           <label for="floatingInputGrid">Expense type</label>
+           <select class="form-select" id="floatingInputGrid" onChange={onChange} name="type" value={expense.type}>
+              <option  value="General">Genral</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Others">Others</option>
+            </select>
+            <label  htmlFor="floatingInputGrid">Expense Type</label>
          </div>
        </div>
      </div>
@@ -157,8 +203,15 @@ setedetail(json[0].details.expense);
             <button className='btn btn-dark' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
                 setntype(expensedetail[i].type);
                 setnval(expensedetail[i].val);
-                setninfo(expensedetail[i].info)}}>Edit</button>
-              <button className='btn btn-danger mx-2'>Delete</button>
+                setninfo(expensedetail[i].info);
+                seteid(expensedetail[i]._id)}}>Edit</button>
+              <button className='btn btn-danger mx-2' onClick={()=>{
+                var exid=expensedetail[i]._id;
+                 const conf=window.confirm("Please confirm");
+                 console.log(conf);
+                 if(1||window.confirm("Please confirm")){
+                deleteexpense(exid);}}
+                }>Delete</button>
             </td>
         <td>{expensedetail[i].type}</td>
         <td>{expensedetail[i].info}</td>
@@ -181,8 +234,13 @@ setedetail(json[0].details.expense);
            <label htmlFor="floatingInputGrid">Expense value</label>
            </div>
         <div className='form-floating my-2'>
-           <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}/>
-           <label htmlFor="floatingInputGrid">Expense type</label>
+           <select class="form-select" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}>
+              <option value="General">Genral</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Others">Others</option>
+            </select>
+            <label  htmlFor="floatingInputGrid">Expense Type</label>
            </div>
         <div className='form-floating my-2'>
            <input type="text" className="form-control" id="floatingInputGrid" onChange={onNewinfoChange} name="ninfo" value={ninfo} />
@@ -191,7 +249,7 @@ setedetail(json[0].details.expense);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onClick={updateexpense} data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
