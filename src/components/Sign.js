@@ -27,7 +27,7 @@ function Sign() {
         if (json.success){
             // Save the auth token and redirect
             //localStorage.setItem('token', json.authtoken); 
-            navigate("/")
+            navigate("../login")
             alert("succes");
 
         }
@@ -80,7 +80,7 @@ function Sign() {
 <button className='btn  btn-primary'>Submit</button>
 </div>
 <div className='d-grid gap-2 my-4'>
-<Link to="/"><button className='btn  btn-dark'>Log in</button></Link>
+<Link to="../login"><button className='btn  btn-dark'>Log in</button></Link>
 </div>
 </fieldset>
 </div>

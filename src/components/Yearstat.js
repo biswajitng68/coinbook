@@ -110,7 +110,7 @@ async function typewiseyrdata(){
         <>
         {(localStorage.getItem("token"))?
         <div className='row mx-3 my-3'>
-            <div className='col mycalback rounded'>
+            <div className=' col col-md-6 col-lg-6 col-sm-12 mycalback rounded'>
               <h3>Your yearly expense stat</h3>
                 <div className='row'>
        {(() => {
@@ -125,7 +125,7 @@ async function typewiseyrdata(){
       })()}
                 </div>
             </div>
-        <div className='col'>
+        <div className=' col col-md-6 col-lg-6 col-sm-12'>
           <div className='chartstat shadow-lg p-2 rounded'><Bar  data={data} /></div>
           <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options={options}  /></div></div>
         </div>

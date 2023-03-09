@@ -21,9 +21,9 @@ root.render(
 
       <Routes>
         <Route element={<App/>}>
-      <Route path="home" element={<Home />}/>
+      <Route path="/" element={<Home />}/>
        <Route path="main" element={<Main />}/>
-        <Route path="/" element={<Log />}/>
+        <Route path="login" element={<Log />}/>
         <Route path="sign" element={<Sign />} />
         <Route path="about" element={<About />} />
         <Route path="year" element={<Yearstat />} />

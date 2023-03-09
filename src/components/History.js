@@ -263,7 +263,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
         return rows;
       })()}
 <h3 style={textcolor}> Your {date} expense sheet </h3>
-     <div className='my-4 table tabl '>
+     <div className='my-4 '>
      <table >
         <tr>
           <th>Change</th>
@@ -350,7 +350,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
         </table>
      </div>
      </div>
-     <div className='col-md-4 col-6 '>
+     <div className='col-md-4 col-sm-12'>
         <div className='mainf'>
         <Link to="/year"> <div className='circstat'><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
         <Link to="/month"><div className='circstat'><h5>{msum}</h5><h4>Expense of month</h4></div></Link>

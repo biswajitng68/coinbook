@@ -6,7 +6,7 @@ import homeim from '../back.png';
 function Home() {
     return(
         <>
-       <img src={homeim}  className='img-fluid'/>
+       <img src={homeim}  id='initpage'/>
 <Outlet/>
         </>
     );

@@ -187,7 +187,7 @@ fetchdayData();
   <button class="btn btn-info" type="button" onClick={handleSubmit}>Add</button>
 </div>
 <h3 style={textcolor}> Today's expense sheet</h3>
-     <div className='my-4 table tabl '>
+     <div className='my-4'>
      <table >
         <tr>
           <th>Change</th>
@@ -200,12 +200,12 @@ fetchdayData();
         for (let i = 0; i < expensedetail.length; i++) {
           rows.push(<tr key={i}>
             <td>
-            <button className='btn btn-dark' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
+            <button className='btn btn-dark mx-2 my-1' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
                 setntype(expensedetail[i].type);
                 setnval(expensedetail[i].val);
                 setninfo(expensedetail[i].info);
                 seteid(expensedetail[i]._id)}}>Edit</button>
-              <button className='btn btn-danger mx-2' onClick={()=>{
+              <button className='btn btn-danger mx-2 my-1' onClick={()=>{
                 var exid=expensedetail[i]._id;
                  const conf=window.confirm("Please confirm");
                  console.log(conf);
@@ -263,7 +263,7 @@ fetchdayData();
         </table>
      </div>
      </div>
-     <div className='col-md-4 col-6 '>
+     <div className='col-md-4 col-sm-12 '>
         <div className='mainf'>
         <Link to="/year"> <div className='circstat'><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
         <Link to="/month"><div className='circstat'><h5>{msum}</h5><h4>Expense of month</h4></div></Link>

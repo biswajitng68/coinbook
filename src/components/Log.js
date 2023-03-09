@@ -1,11 +1,16 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 function Log() {
 
     const [credentials, setCredentials] = useState({email: "", password: ""}) 
     let navigate = useNavigate();
+
+    useEffect(()=>{
+        if(localStorage.getItem("token"))
+        navigate("./")
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +27,7 @@ function Log() {
             // Save the auth token and redirect
             localStorage.setItem("token",json.authtoken);
             alert("succes");
-            navigate("main");
+            navigate("../main");
 
         }
         else{
