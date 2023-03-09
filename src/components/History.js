@@ -57,7 +57,7 @@ if(localStorage.getItem("day")){
   },[]);
   //fetch day sum
 async function fetchData() {
-  const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Sum_Daily", {
+  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Daily", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ setdsum(json[0].sum);
 }
 //fetch monthly sum
 async function fetchmoData() {
-  const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Sum_Monthly", {
+  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Monthly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ setmsum(json[0].sum);
 }
 //fetch yearly sum
 async function fetchyrData() {
-  const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Sum_Yearly", {
+  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Yearly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ const expensehandleSubmit = async (e) => {
   var day=((parseInt(date.substring(8))).toString());
   const value=expense.val
     // e.preventDefault();
-    const response = await fetch("http://localhost:5000/user/add_User_Expense_Daily", {
+    const response = await fetch("https://coinbook.onrender.com/user/add_User_Expense_Daily", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ const expensehandleSubmit = async (e) => {
 //update particular expense
 const updateexpense = async (e) => {
   
-    const response = await fetch("http://localhost:5000/user/update_Any_User_Expense_", {
+    const response = await fetch("https://coinbook.onrender.com/user/update_Any_User_Expense_", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ const updateexpense = async (e) => {
 //delete particular expense
 const deleteexpense = async (exid) => {
   
-  const response = await fetch("http://localhost:5000/user/delete_User_Expense", {
+  const response = await fetch("https://coinbook.onrender.com/user/delete_User_Expense", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ const deleteexpense = async (exid) => {
       console.log(month);
       console.log(day);
       console.log(year);
-      const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Daily", {
+      const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Daily", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'

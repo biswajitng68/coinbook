@@ -24,7 +24,7 @@ function Yearstat() {
 
 //year data of epense monthsum
   async function fetchyerData() {
-    const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Yearly", {
+    const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Yearly", {
    method: 'POST',
    headers: {
        'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ function Yearstat() {
 
 //typewise details fetch
 async function typewiseyrdata(){
-  const response = await fetch("http://localhost:5000/user/fetch_User_Expense_TypeWise_Yearly", {
+  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_TypeWise_Yearly", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

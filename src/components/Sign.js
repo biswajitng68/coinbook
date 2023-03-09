@@ -10,7 +10,7 @@ function Sign() {
         e.preventDefault();
         const {name,email,mobile,password}=credentials
         console.log(credentials);
-        const response = await fetch("http://localhost:5000/user/sign", {
+        const response = await fetch("https://coinbook.onrender.com/user/sign", {
             method: 'POST',
             crossDomain: true,
             headers: {

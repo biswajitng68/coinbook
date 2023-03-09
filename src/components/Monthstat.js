@@ -28,7 +28,7 @@ localStorage.removeItem("mon")}
   async function fetchmoData() {
     setmon(month)
     console.log(selmon);
-    const response = await fetch("http://localhost:5000/user/fetch_User_Expense_Details_Monthly", {
+    const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Monthly", {
    method: 'POST',
    headers: {
        'Content-Type': 'application/json'
