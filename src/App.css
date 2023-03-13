@@ -1,6 +1,6 @@
 
 body{
-    background: linear-gradient(4deg, #2e1f1f, #43e0da) no-repeat center center fixed #000; 
+    background: linear-gradient(266deg, #7c4568, #2b5186) no-repeat center center fixed #000; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -35,6 +35,8 @@ background-color: #0d87b629;
 box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 border-radius: 5%;
 width: 400px;
+margin-left: 10px;
+margin-right: 10px;
 }
 input{
   border-radius: 60%;
@@ -44,7 +46,7 @@ input{
   background-color: #61dafb;
 }
 #navs{
-  background-image: linear-gradient(106deg, #dbf3c1, #1aea8e);
+  background-image: linear-gradient(86deg, #83fff2, #00edbf00);
 }
 /* .mainf{
   border: 1px solid #eee;
@@ -52,15 +54,16 @@ background-color: #0d87b629;
 box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 border-radius: 2%;
 } */
-td, th { border: 1px solid #07f73f; 
+td, th {  
  height: 45px; 
 }
 table {
   border: 1px solid #d6f4c4;
-  background-color: #30c58f4f;
-  box-shadow: 0 3px 4px rgba(232, 221, 221, 0.25);
+  /* background-color: #30c58f4f; */
+  box-shadow: 0 3px 4px rgb(0 255 229);
   width: 100%;
   color: #dbf3c1;
+  text-align: center;
 }
 .circstat{
   border: 1px solid #eee;
@@ -87,12 +90,13 @@ background-color: #1b264663;
 box-shadow: 0 4px 4px rgba(251, 248, 248, 0.715);
 /* border-radius: 10%; */
 text-align: center;
-margin: 20px;
+margin-top: 20px;
+margin-bottom: 20px;
 height: 70px;
 }
 .mycalback{
   border: 1px solid #eee;
-  background-color: #30c58f4f;
+  background-color: #272030a1;
   box-shadow: 0 3px 4px rgba(232, 221, 221, 0.25);
 /* border-radius: 5%; */
 height: fit-content;
@@ -101,7 +105,6 @@ color: #dbf3c1;
 margin-top:40px ;
 }
 .chartstat{
-  min-width:100%;
   min-height: fit-content;
   background-color: #ffffff;
   /* box-shadow: inset 4px 4px 4px rgba(3, 132, 244, 0.725); */
@@ -112,7 +115,8 @@ margin-top:40px ;
 }
 #mycalmonth{
 text-align: center;
-margin: 20px;
+margin-top: 10px;
+margin-bottom :10px; ;
 height: 60px;
 min-width: 80px;
 max-width: fit-content;
@@ -142,7 +146,16 @@ a{
 .mynav{
   margin: 5px; 
   color: #000;
+  cursor: pointer;
 }
 .mynav:hover{
   color: #115191;
+}
+.mobstat{
+  background-color: #261048;
+  margin-left: 2px;
+  width: 30%;
+  text-align: center;
+  border: 1px solid #d6f4c4;
+  color: white;
 }

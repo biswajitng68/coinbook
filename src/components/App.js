@@ -19,19 +19,19 @@ navigate("./");
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        {localStorage.getItem("token")&&<li className="nav-item ">
-          <Link className="nav-Link active mynav" to="/main">Home</Link>
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
+        {localStorage.getItem("token")&&<li className="nav-item " >
+          <p className="nav-Link active mynav" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onClick={()=>{navigate("/main")}}>Home</p>
         </li>}
-        {localStorage.getItem("token")&&<li className="nav-item">
-          <Link className="nav-Link active mynav"  to="/history">History</Link>
+        {localStorage.getItem("token")&&<li className="nav-item" >
+          <p className="nav-Link active mynav" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onClick={()=>{navigate("/history")}}>History</p>
         </li>}
-        <li className="nav-item">
-          <Link className="nav-Link mynav" to="/about">About</Link>
+        <li className="nav-item" >
+          <p className="nav-Link mynav" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onClick={()=>{navigate("/about")}}>About</p>
         </li>
         
-      </ul>
-      {!localStorage.getItem("token")?<Link className="nav-Link" to="/login"><button className='btn btn-dark mx-2'>Log in</button></Link>:<button className='btn btn-dark' onClick={logout}>log out</button>}
+      </ul >
+      {!localStorage.getItem("token")?<p className="nav-Link"   data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" onClick={()=>{navigate("/login")}}><button className='btn btn-dark mx-2'>Log in</button></p>:<button className='btn btn-dark' onClick={logout} data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">log out</button>}
     </div>
   </div>
   

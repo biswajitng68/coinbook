@@ -96,8 +96,8 @@ localStorage.removeItem("mon")}
                 </div>
             </div>
         <div className='col-lg-6'>
-          <div className='chartstat shadow-lg p-2 rounded'><Bar  data={data} /></div>
-          <div className='chartstat shadow-lg p-2  rounded'><Line  data={data} /></div>
+          <div className='chartstat shadow-lg p-2 rounded mx-2 my-2'><Bar  data={data} /></div>
+          <div className='chartstat shadow-lg p-2  rounded mx-2 my-2'><Line  data={data} /></div>
         </div>
         </div>
        :

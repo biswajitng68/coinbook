@@ -1,11 +1,12 @@
 import '../App.css';
-import {Outlet, Link } from "react-router-dom";
+import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState,useEffect,useRef} from 'react';
 
 function Main() {
   var textcolor={
     color:"#dbf3c1"
   };
+  let navigate=useNavigate();
   const dataFetchedRef = useRef(false);
   const [expense, setExpnses] = useState({type: "General", val:0,info:""}) 
 var date=new Date();
@@ -112,7 +113,7 @@ const updateexpense = async (e) => {
 }
 
 //delete particular expense
-const deleteexpense = async (exid) => {
+const deleteexpense = async () => {
 
 const response = await fetch("https://coinbook.onrender.com/user/delete_User_Expense", {
     method: 'POST',
@@ -120,7 +121,7 @@ const response = await fetch("https://coinbook.onrender.com/user/delete_User_Exp
         'Content-Type': 'application/json'
     },
     
-    body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:exid})
+    body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid})
 });
 const json = await response.json()
 console.log(json);
@@ -156,6 +157,12 @@ fetchdayData();
     return(
         <>
         {(localStorage.getItem("token"))?
+        <>
+        {(window.screen.width<500)&&<div className='row d-flex justify-content-evenly p-2'>
+       <div className='col-4 mobstat rounded' onClick={()=>{navigate("../year")}}><p>{ysum}</p><p>Year expense</p></div>
+          <div className='col-4 mobstat rounded' onClick={()=>{navigate("../month")}}><p>{msum}</p><p>Month expense</p></div>
+          <div className='col-4 mobstat rounded'><p>{dsum}</p><p>Day expense</p></div>
+        </div>}
         <div className=' my-4 row mx-4'>
         <div className='col-md-8'>
             <h3 style={textcolor}>Add your today's expense</h3>
@@ -189,32 +196,24 @@ fetchdayData();
 <h3 style={textcolor}> Today's expense sheet</h3>
      <div className='my-4'>
      <table >
-        <tr>
-          <th>Change</th>
+        <tr id='rowfirst'>
         <th>Expense type</th>
-        <th>Expense details</th>
+        {(window.screen.width)>500&&<th>Expense details</th>}
         <th>Expense</th>
         </tr>
         {(() => {
         let rows = [];
         for (let i = 0; i < expensedetail.length; i++) {
           rows.push(<tr key={i}>
-            <td>
-            <button className='btn btn-dark mx-2 my-1' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
+        <td>{expensedetail[i].type} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{
                 setntype(expensedetail[i].type);
                 setnval(expensedetail[i].val);
                 setninfo(expensedetail[i].info);
-                seteid(expensedetail[i]._id)}}>Edit</button>
-              <button className='btn btn-danger mx-2 my-1' onClick={()=>{
-                var exid=expensedetail[i]._id;
-                 const conf=window.confirm("Please confirm");
-                 console.log(conf);
-                 if(1||window.confirm("Please confirm")){
-                deleteexpense(exid);}}
-                }>Delete</button>
-            </td>
-        <td>{expensedetail[i].type}</td>
-        <td>{expensedetail[i].info}</td>
+                seteid(expensedetail[i]._id)}}>
+  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+</svg></td>
+        {(window.screen.width)>500&&<td>{expensedetail[i].info}</td>}
         <td>{expensedetail[i].val}</td>
         </tr>
             );
@@ -248,29 +247,35 @@ fetchdayData();
            </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={()=>{
+  
+                 const conf=window.confirm("Please confirm");
+                 console.log(conf);
+                 if(1||window.confirm("Please confirm")){
+                deleteexpense();}}
+                }>Delete</button>
         <button type="button" class="btn btn-primary" onClick={updateexpense} data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-        <tr>
+        <tr id='rowlast'>
         <th>Total expense</th>
-        <th></th>
-        <th></th>
+        {(window.screen.width>500)&&<th></th>}
         <th>{dsum}</th>
         </tr>
         </table>
      </div>
      </div>
      <div className='col-md-4 col-sm-12 '>
-        <div className='mainf'>
-        <Link to="/year"> <div className='circstat'><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
-        <Link to="/month"><div className='circstat'><h5>{msum}</h5><h4>Expense of month</h4></div></Link>
+        {(window.screen.width>500)&&<div className='mainf'>
+        <Link to="/year"><div className='circstat' ><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
+        <Link to="/month"><div className='circstat' ><h5>{msum}</h5><h4>Expense of month</h4></div></Link>
         <div className='circstat'><h5>{dsum}</h5><h4>Expense of day</h4></div>
-        </div>
+        </div>}
      </div>
      </div>
+     </>
        :
        <div>sorry you have to login first</div>
        }
