@@ -12,6 +12,8 @@ import Main from './components/Main';
 import Yearstat from './components/Yearstat';
 import Monthstat from './components/Monthstat';
 import History from './components/History';
+import Profile from './components/Profile';
+import Passwordchange from './components/Passwordchange';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,7 +31,8 @@ root.render(
         <Route path="year" element={<Yearstat />} />
         <Route path="month" element={<Monthstat />} />
         <Route path="history" element={<History />} />
-        
+        <Route path="profile" element={<Profile />} />
+        <Route path="passchange" element={<Passwordchange />} />
         </Route>
       </Routes>
 

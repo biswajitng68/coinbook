@@ -1,7 +1,7 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState,useEffect} from 'react';
-
+import {Dna} from 'react-loader-spinner';
 function History() {
   var textcolor={
     color:"#dbf3c1"
@@ -12,6 +12,7 @@ var month=ddate.getMonth().toString();
 var year=ddate.getFullYear().toString();
 var day=ddate.getDate().toString();
 var yyear=year
+const [fetchsuccess,setfsuc]=useState(true);
 const [date,setdate]=useState();
 console.log(date);
 const [expensedetail,setedetail]=useState([]);
@@ -58,7 +59,8 @@ if(localStorage.getItem("day")){
   },[]);
   //fetch day sum
 async function fetchData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Daily", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Daily", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -68,10 +70,12 @@ async function fetchData() {
 });
 const json = await response.json()
 setdsum(json[0].sum);
+setfsuc(true);
 }
 //fetch monthly sum
 async function fetchmoData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Monthly", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Monthly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -81,10 +85,12 @@ async function fetchmoData() {
 });
 const json = await response.json()
 setmsum(json[0].sum);
+setfsuc(true);
 }
 //fetch yearly sum
 async function fetchyrData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Yearly", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Yearly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -94,17 +100,19 @@ async function fetchyrData() {
 });
 const json = await response.json()
 setysum(json[0].sum);
+setfsuc(true);
 }
 
 //expense add in particular day
 const expensehandleSubmit = async (e) => {
+  setfsuc(false);
   console.log(date);
   var year=date.substring(0,4);
   var month=((parseInt(date.substring(5,7))-1).toString());
   var day=((parseInt(date.substring(8))).toString());
   const value=expense.val
     // e.preventDefault();
-    const response = await fetch("https://coinbook.onrender.com/user/add_User_Expense_Daily", {
+    const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/add_User_Expense_Daily", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -118,12 +126,13 @@ const expensehandleSubmit = async (e) => {
     fetchData();
     fetchmoData();
     fetchyrData();
+    setfsuc(true);
 }
 
 //update particular expense
 const updateexpense = async (e) => {
-  
-    const response = await fetch("https://coinbook.onrender.com/user/update_Any_User_Expense_", {
+  setfsuc(false);
+    const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/update_Any_User_Expense_", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -137,12 +146,13 @@ const updateexpense = async (e) => {
     fetchData();
     fetchmoData();
     fetchyrData();
+    setfsuc(true);
 }
 
 //delete particular expense
 const deleteexpense = async () => {
-  
-  const response = await fetch("https://coinbook.onrender.com/user/delete_User_Expense", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/delete_User_Expense", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -156,10 +166,12 @@ const deleteexpense = async () => {
   fetchData();
   fetchmoData();
   fetchyrData();
+  setfsuc(true);
 }
 
 //fetch daywise expense details
   const handleSubmit = async (e) => {
+    setfsuc(false);
     if(localStorage.getItem("day")){
       var selectmonth=localStorage.getItem("mon").length==1?0+localStorage.getItem("mon"):localStorage.getItem("mon");
       var selectday=localStorage.getItem("day").length==1?0+localStorage.getItem("day"):localStorage.getItem("day");
@@ -173,10 +185,10 @@ const deleteexpense = async () => {
         localStorage.removeItem("day")
         localStorage.removeItem("mon")
       }
-      console.log(month);
-      console.log(day);
-      console.log(year);
-      const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Daily", {
+      // console.log(month);
+      // console.log(day);
+      // console.log(year);
+      const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Details_Daily", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -191,12 +203,21 @@ const deleteexpense = async () => {
       setdId(json[0].details._id)}
       else
       setedetail([]);
+      setfsuc(true);
   }
 
     return(
         <>
         {(localStorage.getItem("token"))?
         <>
+        {fetchsuccess==false&&<div className="loader-container"><Dna 
+  visible={true}
+  height="200"
+  width={window.screen.width}
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+/></div>}
         {(window.screen.width<500)&&<div className='row d-flex justify-content-evenly p-2'>
         <div className='col-4 mobstat rounded' onClick={()=>{navigate("../year")}}><p>{ysum}</p><p>Year expense</p></div>
           <div className='col-4 mobstat rounded' onClick={()=>{navigate("../month")}}><p>{msum}</p><p>Month expense</p></div>

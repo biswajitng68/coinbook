@@ -1,20 +1,21 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState,useEffect} from 'react';
-
+import {Dna} from 'react-loader-spinner';
 function Log() {
 
     const [credentials, setCredentials] = useState({email: "", password: ""}) 
     let navigate = useNavigate();
-
+    const [fetchsuccess,setfsuc]=useState(true);
     useEffect(()=>{
         if(localStorage.getItem("token"))
         navigate("./")
     },[])
 
     const handleSubmit = async (e) => {
+        setfsuc(false);
         e.preventDefault();
-        const response = await fetch("https://coinbook.onrender.com/user/login", {
+        const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,16 +24,17 @@ function Log() {
         });
         const json = await response.json()
         console.log(json);
-        if (json.success){
+        if (json.res_Status){
             // Save the auth token and redirect
             localStorage.setItem("token",json.authtoken);
-            alert("succes");
+            alert(json.message);
             navigate("../main");
 
         }
         else{
-            alert("Invalid credentials");
+            alert(json.error);
         }
+        setfsuc(true);
     }
 
     const onChange = (e)=>{
@@ -51,6 +53,14 @@ function Log() {
     };
     return(
         <>
+        {fetchsuccess==false&&<div className="loader-container"><Dna 
+  visible={true}
+  height="200"
+  width={window.screen.width}
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+/></div>}
         <form onSubmit={handleSubmit}>
         <div  style={lst}>
             <div className="wrap">

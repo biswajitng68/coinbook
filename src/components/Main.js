@@ -1,13 +1,14 @@
 import '../App.css';
 import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useState,useEffect,useRef} from 'react';
-
+import {Dna} from 'react-loader-spinner';
 function Main() {
   var textcolor={
     color:"#dbf3c1"
   };
   let navigate=useNavigate();
   const dataFetchedRef = useRef(false);
+  const [fetchsuccess,setfsuc]=useState(true);
   const [expense, setExpnses] = useState({type: "General", val:0,info:""}) 
 var date=new Date();
 var month=date.getMonth().toString();
@@ -42,7 +43,8 @@ useEffect(() => {
 },[]);
 //fetch day sum
 async function fetchData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Daily", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Daily", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -52,10 +54,12 @@ async function fetchData() {
 });
 const json = await response.json()
 setdsum(json[0].sum);
+setfsuc(true);
 }
 //fetch monthly sum
 async function fetchmoData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Monthly", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Monthly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -65,10 +69,12 @@ async function fetchmoData() {
 });
 const json = await response.json()
 setmsum(json[0].sum);
+setfsuc(true);
 }
 //fetch yearly sum
 async function fetchyrData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Sum_Yearly", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Sum_Yearly", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -78,10 +84,12 @@ async function fetchyrData() {
 });
 const json = await response.json()
 setysum(json[0].sum);
+setfsuc(true);
 }
 //fetch expense details
 async function fetchdayData() {
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Daily", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Details_Daily", {
  method: 'POST',
  headers: {
      'Content-Type': 'application/json'
@@ -92,11 +100,12 @@ async function fetchdayData() {
 const json = await response.json()
 setedetail(json[0].details.expense);
 setdId(json[0].details._id)
+setfsuc(true);
 }
 
 const updateexpense = async (e) => {
-  
-  const response = await fetch("https://coinbook.onrender.com/user/update_Any_User_Expense_", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/update_Any_User_Expense_", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -110,12 +119,13 @@ const updateexpense = async (e) => {
   fetchmoData();
   fetchyrData();
   fetchdayData();
+  setfsuc(true);
 }
 
 //delete particular expense
 const deleteexpense = async () => {
-
-const response = await fetch("https://coinbook.onrender.com/user/delete_User_Expense", {
+setfsuc(false);
+const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/delete_User_Expense", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -129,13 +139,15 @@ fetchData();
 fetchmoData();
 fetchyrData();
 fetchdayData();
+setfsuc(true);
 }
 
 //add expense
     const handleSubmit = async (e) => {
+      setfsuc(false);
       const value=expense.val
         e.preventDefault();
-        const response = await fetch("https://coinbook.onrender.com/user/add_User_Expense_Daily", {
+        const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/add_User_Expense_Daily", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -149,6 +161,7 @@ fetchdayData();
         fetchmoData();
         fetchyrData();
         fetchData();
+        setfsuc(true);
     }
 
     const onChange = (e)=>{
@@ -158,6 +171,14 @@ fetchdayData();
         <>
         {(localStorage.getItem("token"))?
         <>
+        {fetchsuccess==false&&<div className="loader-container"><Dna 
+  visible={true}
+  height="200"
+  width={window.screen.width}
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+/></div>}
         {(window.screen.width<500)&&<div className='row d-flex justify-content-evenly p-2'>
        <div className='col-4 mobstat rounded' onClick={()=>{navigate("../year")}}><p>{ysum}</p><p>Year expense</p></div>
           <div className='col-4 mobstat rounded' onClick={()=>{navigate("../month")}}><p>{msum}</p><p>Month expense</p></div>

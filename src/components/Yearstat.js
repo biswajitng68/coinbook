@@ -3,11 +3,12 @@ import {Outlet, Link,useNavigate } from "react-router-dom";
 import React, {useEffect, useState,} from 'react';
 import Chart from "chart.js/auto";
 import { Bar, Line, Doughnut,Pie } from "react-chartjs-2";
-
+import {Dna} from 'react-loader-spinner';
 
 function Yearstat() {
   let navigate = useNavigate();
   var date=new Date();
+  const [fetchsuccess,setfsuc]=useState(true);
   var month=date.getMonth().toString();
   var year=date.getFullYear().toString();
   var day=date.getDate().toString();
@@ -24,7 +25,8 @@ function Yearstat() {
 
 //year data of epense monthsum
   async function fetchyerData() {
-    const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_Details_Yearly", {
+    setfsuc(false);
+    const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Details_Yearly", {
    method: 'POST',
    headers: {
        'Content-Type': 'application/json'
@@ -43,11 +45,13 @@ function Yearstat() {
     {exar[i]=0;}
   }
  setyrdetail(exar);
+ setfsuc(true);
   }
 
 //typewise details fetch
 async function typewiseyrdata(){
-  const response = await fetch("https://coinbook.onrender.com/user/fetch_User_Expense_TypeWise_Yearly", {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_TypeWise_Yearly", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -62,9 +66,10 @@ async function typewiseyrdata(){
       types[i]=json[i]._id;
       typesums[i]=json[i].sum;
     }
-    settype(types);
-    settypesum(typesums);
    }
+   settype(types);
+   settypesum(typesums);
+   setfsuc(true);
 }
 
 
@@ -109,6 +114,15 @@ async function typewiseyrdata(){
     return(
         <>
         {(localStorage.getItem("token"))?
+        <>
+        {fetchsuccess==false&&<div className="loader-container"><Dna 
+  visible={true}
+  height="200"
+  width={window.screen.width}
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+/></div>}
         <div className='row mx-3 my-3'>
             <div className=' col col-md-6 col-lg-6 col-sm-12 mycalback rounded'>
               <h3>Your yearly expense stat</h3>
@@ -130,6 +144,7 @@ async function typewiseyrdata(){
           <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options={options}  /></div></div>
         </div>
         </div>
+        </>
        :
        <div>sorry you have to login first</div>
        }

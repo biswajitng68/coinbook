@@ -1,16 +1,18 @@
 import '../App.css';
 import {Outlet, Link ,useNavigate} from "react-router-dom";
 import { useState } from 'react';
+import {Dna} from 'react-loader-spinner';
 function Sign() {
 
     const [credentials, setCredentials] = useState({name:"", mobile:"", email: "", password: ""}) 
     let navigate = useNavigate();
-
+    const [fetchsuccess,setfsuc]=useState(true);
     const handleSubmit = async (e) => {
+        setfsuc(false);
         e.preventDefault();
         const {name,email,mobile,password}=credentials
         console.log(credentials);
-        const response = await fetch("https://coinbook.onrender.com/user/sign", {
+        const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/register", {
             method: 'POST',
             crossDomain: true,
             headers: {
@@ -24,16 +26,17 @@ function Sign() {
         });
         const json = await response.json()
         console.log(json);
-        if (json.success){
+        if (json.res_Status){
             // Save the auth token and redirect
             //localStorage.setItem('token', json.authtoken); 
             navigate("../login")
-            alert("succes");
+            alert(json.message);
 
         }
         else{
-            alert("Invalid credentials");
+            alert(json.error);
         }
+        setfsuc(true);
     }
 
     const onChange = (e)=>{
@@ -55,6 +58,14 @@ function Sign() {
     };
     return(
         <>
+          {fetchsuccess==false&&<div className="loader-container"><Dna 
+  visible={true}
+  height="200"
+  width={window.screen.width}
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+/></div>}
         <form onSubmit={handleSubmit}>
         <div  style={lst}>
             <div className="wrap" style={nst}>
