@@ -53,6 +53,7 @@ async function fetchData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setdsum(json[0].sum);
 setfsuc(true);
 }
@@ -68,6 +69,7 @@ async function fetchmoData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setmsum(json[0].sum);
 setfsuc(true);
 }
@@ -83,6 +85,7 @@ async function fetchyrData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setysum(json[0].sum);
 setfsuc(true);
 }
@@ -98,11 +101,13 @@ async function fetchdayData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+console.log(json);
+if(json.length>0){
 setedetail(json[0].details.expense);
-setdId(json[0].details._id)
+setdId(json[0].details._id)}
 setfsuc(true);
 }
-
+//update expense
 const updateexpense = async (e) => {
   setfsuc(false);
   const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/update_Any_User_Expense_", {

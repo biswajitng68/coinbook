@@ -14,7 +14,6 @@ var day=ddate.getDate().toString();
 var yyear=year
 const [fetchsuccess,setfsuc]=useState(true);
 const [date,setdate]=useState();
-console.log(date);
 const [expensedetail,setedetail]=useState([]);
 const [dsum,setdsum]=useState(0);
 const [ysum,setysum]=useState(0);
@@ -69,6 +68,7 @@ async function fetchData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setdsum(json[0].sum);
 setfsuc(true);
 }
@@ -84,6 +84,7 @@ async function fetchmoData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setmsum(json[0].sum);
 setfsuc(true);
 }
@@ -99,6 +100,7 @@ async function fetchyrData() {
  body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
 });
 const json = await response.json()
+if(json.length>0)
 setysum(json[0].sum);
 setfsuc(true);
 }
@@ -106,7 +108,6 @@ setfsuc(true);
 //expense add in particular day
 const expensehandleSubmit = async (e) => {
   setfsuc(false);
-  console.log(date);
   var year=date.substring(0,4);
   var month=((parseInt(date.substring(5,7))-1).toString());
   var day=((parseInt(date.substring(8))).toString());
@@ -121,7 +122,6 @@ const expensehandleSubmit = async (e) => {
         body: JSON.stringify({token: localStorage.getItem("token"), field: expense.type, value,month:month,year:year,day:day,info:expense.info})
     });
     const json = await response.json()
-    console.log(json);
     handleSubmit(e);
     fetchData();
     fetchmoData();
@@ -141,7 +141,6 @@ const updateexpense = async (e) => {
         body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid, new_field:ntype, new_value:nval, new_info:ninfo})
     });
     const json = await response.json()
-    console.log(json);
     handleSubmit();
     fetchData();
     fetchmoData();
@@ -161,7 +160,6 @@ const deleteexpense = async () => {
       body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid})
   });
   const json = await response.json()
-  console.log(json);
   handleSubmit();
   fetchData();
   fetchmoData();
@@ -197,7 +195,6 @@ const deleteexpense = async () => {
           body: JSON.stringify({token: localStorage.getItem("token"),month:month,year:year,day:day})
       });
       const json = await response.json()
-      console.log(json);
       if(json[0]){
       setedetail(json[0].details.expense);
       setdId(json[0].details._id)}
@@ -236,17 +233,13 @@ const deleteexpense = async () => {
 </div>
 {(() => {
         let rows = [];
-        console.log(date);
         if(date){
-        console.log(date);
 
           var yyear=parseInt(date.substring(0,4));
   var mmonth=((parseInt(date.substring(5,7))-1));
   var dday=((parseInt(date.substring(8))));
-  console.log(year+"-"+month+"-"+day);
-  console.log(yyear+"-"+mmonth+"-"+dday);
 if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmonth==parseInt(month)&&dday<=parseInt(day))))){
-  console.log(date);
+
 
           rows.push(
             
@@ -282,7 +275,6 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
                 );
         }}
         else{
-        console.log(date);
 
           rows.push(
             <h4 style={textcolor}>Please enter a valid date to see, add, edit expense history</h4>
@@ -357,7 +349,6 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={()=>{
                  const conf=window.confirm("Please confirm");
-                 console.log(conf);
                  if(1||window.confirm("Please confirm")){
                 deleteexpense();}}
                 }>Delete</button>
