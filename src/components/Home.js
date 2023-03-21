@@ -4,16 +4,26 @@ import React, {useState} from 'react';
 import homeim from '../back.png';
 import fpvid from '../fpvideo.mp4';
 import fetearevid from '../Coin Book.mp4'
+import fpvidph from '../fpvideoph.mp4';
+import fetearevidph from '../Coin Bookph.mp4'
 function Home() {
     return(
         <>
-       {/* <img src={homeim}  id='initpage'/> */}
-       <video width={window.screen.width-20} height={window.screen.height-48} fluid={false} autoPlay muted>
+
+        {window.screen.width>500?<><div className='d-flex justify-content-center '>
+       <video className='fpvid'  autoPlay muted>
         <source src={fpvid}/>
-       </video>
-       <video width={window.screen.width-20} height={window.screen.height-48} fluid={false} autoPlay muted loop>
+       </video></div>
+       <div className='d-flex justify-content-center'><video className='fpvid' autoPlay muted loop>
         <source src={fetearevid}/>
-       </video>
+       </video></div></>:
+       <><div className='d-flex justify-content-center '>
+       <video className='fpvid'  autoPlay muted>
+        <source src={fpvidph}/>
+       </video></div>
+       <div className='d-flex justify-content-center'><video className='fpvid' autoPlay muted loop>
+        <source src={fetearevidph}/>
+       </video></div></>}
 <Outlet/>
         </>
     );
