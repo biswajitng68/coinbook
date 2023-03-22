@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/coinbook/static/css/main.ecc171aa.css",
-    "main.js": "/coinbook/static/js/main.5f2c3616.js",
+    "main.css": "/coinbook/static/css/main.5118ed68.css",
+    "main.js": "/coinbook/static/js/main.984c341b.js",
     "static/js/787.28cb0dcd.chunk.js": "/coinbook/static/js/787.28cb0dcd.chunk.js",
     "static/media/fpvideo.mp4": "/coinbook/static/media/fpvideo.d12de47ce4a4ce8ec25d.mp4",
     "static/media/back.png": "/coinbook/static/media/back.1d49b091d2c858a21a72.png",
@@ -9,12 +9,12 @@
     "static/media/Coin Book.mp4": "/coinbook/static/media/Coin Book.8f2884477c3c09c453c0.mp4",
     "static/media/Coin Bookph.mp4": "/coinbook/static/media/Coin Bookph.a06c14efdcef10e41642.mp4",
     "index.html": "/coinbook/index.html",
-    "main.ecc171aa.css.map": "/coinbook/static/css/main.ecc171aa.css.map",
-    "main.5f2c3616.js.map": "/coinbook/static/js/main.5f2c3616.js.map",
+    "main.5118ed68.css.map": "/coinbook/static/css/main.5118ed68.css.map",
+    "main.984c341b.js.map": "/coinbook/static/js/main.984c341b.js.map",
     "787.28cb0dcd.chunk.js.map": "/coinbook/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ecc171aa.css",
-    "static/js/main.5f2c3616.js"
+    "static/css/main.5118ed68.css",
+    "static/js/main.984c341b.js"
   ]
 }
