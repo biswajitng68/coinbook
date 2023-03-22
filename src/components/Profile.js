@@ -8,12 +8,14 @@ function Profile() {
     const [profdet,setprofdet]=useState([]);
     const [extypead,setextypead]=useState();
     const [pass,setpass]=useState();
+    const [etypespresent,setpretype]=useState([]);
     // const [newpass,setnpass]=useState();
     // const [passchangepossible,setchangeposs]=useState(false);
     useEffect(()=>{
         if(!localStorage.getItem("token"))
         navigate("./")
         fetchprofdetail();
+        fetchexpensetype();
     },[])
 //profile details fetch
 async function fetchprofdetail() {
@@ -36,10 +38,32 @@ element[2]=json.data.email;
 setprofdet(element);
 setfsuc(true);
 }
+
+//add expense type
+async function fetchexpensetype() {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Types", {
+ method: 'POST',
+ headers: {
+     'Content-Type': 'application/json'
+ },
+ 
+ body: JSON.stringify({token: localStorage.getItem("token")})
+});
+const json = await response.json()
+if(json.message=="ok"){
+  setpretype(json.data.expense_Type_List);
+}
+setfsuc(true);
+}
+
 //add expense type
 async function addexpensetype() {
   setfsuc(false);
-  console.log(extypead);
+  if(extypead.toUpperCase()=="OTHER"||extypead.toUpperCase()=="TRAVEL"||extypead.toUpperCase()=="FOOD"||extypead.toUpperCase()=="GENERAL"){
+    alert("This type exists by default")
+  }
+  else{
   const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/add_User_Expense_Type", {
  method: 'POST',
  headers: {
@@ -49,7 +73,8 @@ async function addexpensetype() {
  body: JSON.stringify({token: localStorage.getItem("token"),expense_Type:extypead})
 });
 const json = await response.json()
-alert(json.message)
+fetchexpensetype();
+alert(json.message)}
 setfsuc(true);
 }
 
@@ -88,12 +113,36 @@ setfsuc(true);
 /></div>}<div className='container'>
         <div className='d-flex justify-content-center'>
             <div id='profilebox' className='rounded'>
-        <div className='profelement'>Name: {profdet[0]}</div>
-        <div className='profelement'>Mobile: {profdet[1]}</div>
-        <div className='profelement'>Email: {profdet[2]}</div>
-        <div className='profelement'>Regular expense types: None</div>
+        <div className='profelement'><p>Name:</p> <input type="text" class="form-control" disabled value={profdet[0]}></input></div>
+        <div className='profelement'><p>Mobile:</p> <input type="text" class="form-control" disabled value={profdet[1]}></input></div>
+        <div className='profelement'><p>Email:</p> <input type="text" class="form-control" disabled value={profdet[2]}></input></div>
+        <div className='profelement'><p>Regular expense types:</p> 
+        <div class="dropdown">
+  <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Expense types
+  </button>
+  <ul class="dropdown-menu">
+    {(()=>{
+        let rows = [];
+        if(etypespresent.length==0)
+        {
+          rows.push(
+            <li><button class="dropdown-item" type="button" key={100}>Nothing here</button></li>
+            );
+        }
+        else{
+        for (let i = 0; i < etypespresent.length; i++) {
+          rows.push(
+            <li><button class="dropdown-item" type="button" key={i}>{etypespresent[i].expense_Type}</button></li>
+            );
+        }}
+        return rows;
+    })()}
+  </ul>
+</div>
+        </div>
         <div className='profelement'>
-            Add your regular expense types
+            Add your regular expense types:
             <form className='row g-2 my-2'>
             <div class="col-auto">
     <label htmlFor="inputPassword2" class="visually-hidden">Add your regular expense type</label>
@@ -109,7 +158,7 @@ setfsuc(true);
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content" id='mymodal'>
-      <div class="modal-header" >
+      <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Enter old password</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
