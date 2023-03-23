@@ -294,10 +294,38 @@ setfsuc(true);
      </div>
      </div>
      <div className='col-md-4 col-sm-12 '>
-        {(window.screen.width>500)&&<div className='mainf'>
-        <Link to="/year"><div className='circstat' ><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
-        <Link to="/month"><div className='circstat' ><h5>{msum}</h5><h4>Expense of month</h4></div></Link>
-        <div className='circstat'><h5>{dsum}</h5><h4>Expense of day</h4></div>
+        {(window.screen.width>500)&&<div className='mainf expensestat rounded'>
+        <Link to="/year"><div className='circstat row g-3' >
+          <div className='col circstatcenter'>
+            <h5>Rs. {ysum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of year</h4>
+            </div>
+          </div>
+          </Link>
+          <p className=' dividerhz'></p> 
+          <Link to="/year"><div className='circstat row g-3' >
+          <div className='col circstatcenter'>
+            <h5>Rs. {msum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of month</h4>
+            </div>
+          </div>
+          </Link>
+          <p className=' dividerhz'></p>
+          <div className='circstat row g-3' >
+          <div className='col circstatcenter'>
+            <h5>Rs. {dsum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of day</h4>
+            </div>
+          </div>
         </div>}
      </div>
      </div>

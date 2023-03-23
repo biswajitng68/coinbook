@@ -66,20 +66,62 @@ table {
   text-align: center;
 }
 .circstat{
-  border: 1px solid #eee;
-background-color: #ffffff;
-box-shadow: 0 0 10px rgb(5 241 180);
-min-height: 200px;
-max-height: fit-content;
+height: 200px;
+/* max-height: fit-content; */
 text-align: center;
 margin: 5px;
-padding: 90px;
-border-radius: 50%  10%;
-margin-top: 5px;
+/* border-radius: 50%  10%; */
 text-decoration: none;
 }
+.dividervt{
+  background-image: linear-gradient(86deg, #83fff2, #00edbf00);
+  max-width: 2px;
+  padding: 0%;
+  animation:lineup forwards linear infinite;
+  animation-duration: 4s;
+}
+
+
+@keyframes lineup {
+ 10% {
+ margin-top: 20px;
+  }
+20% {
+    margin-top: 40px;
+     }
+30% {
+      margin-top: 60px;
+       }
+40% {
+        margin-top: 80px;
+         }
+  50%{margin-top: 100px;
+  }
+  60%{margin-bottom: 90px;
+  }
+  70%{margin-top: 80px;
+  }
+  80%{margin-top: 70px;
+  }
+  90%{margin-top: 60px;
+  }
+  100% {margin-top: 50px;
+  }
+}
+.dividerhz{
+  background-image: linear-gradient(73deg, #bd05ff, #00bbff);
+  height: 2px;
+  padding: 0%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.circstatcenter{
+  margin-top: 80px;
+  /* background-image: linear-gradient(73deg, #bd05ff, #00bbff); */
+}
+
 .circstat:hover{
-  background-color: #e3aefd89;
+  background-color: #7bacf621;
 }
 #circbox{
   margin-left: 2px;
@@ -190,4 +232,9 @@ box-shadow: inset 0.2em 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3), 0em 0em 0.2em 0.2e
 .fpvid{
   width: 98vw;
   margin-top: 10px;
+}
+.expensestat{
+  /* background-color: #f9f7f7; */
+  border: 1px solid #00ffb1 ;
+
 }
