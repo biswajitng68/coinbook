@@ -39,7 +39,7 @@ setprofdet(element);
 setfsuc(true);
 }
 
-//add expense type
+//fetch expense type
 async function fetchexpensetype() {
   setfsuc(false);
   const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Types", {
@@ -110,15 +110,17 @@ setfsuc(true);
   ariaLabel="dna-loading"
   wrapperStyle={{}}
   wrapperClass="dna-wrapper"
-/></div>}<div className='container'>
+/></div>}<div className='container-fluid'>
         <div className='d-flex justify-content-center'>
-            <div id='profilebox' className='rounded'>
-        <div className='profelement'><p>Name:</p> <input type="text" class="form-control" disabled value={profdet[0]}></input></div>
-        <div className='profelement'><p>Mobile:</p> <input type="text" class="form-control" disabled value={profdet[1]}></input></div>
-        <div className='profelement'><p>Email:</p> <input type="text" class="form-control" disabled value={profdet[2]}></input></div>
-        <div className='profelement'><p>Regular expense types:</p> 
+          
+            <div id='profilebox' className=' rounded'>
+              <div className='row'>
+        <div className='profelement col-sm-6 col-md-4 col-12'><p>Name:</p> <input type="text" class="form-control" disabled value={profdet[0]}></input></div>
+        <div className='profelement col-sm-6 col-md-4 col-12'><p>Mobile:</p> <input type="text" class="form-control" disabled value={profdet[1]}></input></div>
+        <div className='profelement col-sm-6 col-md-4 col-12'><p>Email:</p> <input type="text" class="form-control" disabled value={profdet[2]}></input></div>
+        <div className='profelement col-sm-6 col-md-4 col-12'><p>Regular expense types:</p> 
         <div class="dropdown">
-  <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn btn-light dropdown-toggle form-control" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Expense types
   </button>
   <ul class="dropdown-menu">
@@ -141,16 +143,17 @@ setfsuc(true);
   </ul>
 </div>
         </div>
-        <div className='profelement'>
+        <div className='profelement col-sm-6 col-md-4 col-12'>
             Add your regular expense types:
             <form className='row g-2 my-2'>
-            <div class="col-auto">
-    <label htmlFor="inputPassword2" class="visually-hidden">Add your regular expense type</label>
-    <input type="text" class="form-control" id="inputPassword2" placeholder="Eg:Food" value={extypead} onChange={(e)=>{setextypead(e.target.value)}}/>
+            <div className="col-lg-10 col-md-10 col-sm-10 col-auto">
+    <label htmlFor="inputPassword2" className="visually-hidden">Add your regular expense type</label>
+    <input type="text" className="form-control" id="inputPassword2" placeholder="Eg:Food" value={extypead} onChange={(e)=>{setextypead(e.target.value)}}/>
   </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3" onClick={(e)=>{e.preventDefault();addexpensetype()}}>Add</button>
+  <div className="col-lg-2 col-md-2 col-sm-2 col-auto">
+    <button type="submit" className="btn btn-primary mb-3" onClick={(e)=>{e.preventDefault();addexpensetype()}}>Add</button>
   </div></form>
+        </div>
         </div>
         <div className='d-flex justify-content-between'>
         <button className='btn btn-dark' onClick={()=>{localStorage.clear(); navigate("../");}} >log out</button>

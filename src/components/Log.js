@@ -73,6 +73,7 @@ function Log() {
 <div className="form-floating">
   <input type="password" className="form-control" id="floatingPassword" placeholder="Password"  value={credentials.password} onChange={onChange} name="password"/>
   <label htmlFor="floatingPassword">Password</label>
+  <Link to="../otpgen"><p>Forgot password?</p></Link>
 </div>
 <div className='d-grid gap-2 my-4'>
 <button className='btn  btn-primary'>Submit</button>

@@ -24,6 +24,7 @@ const [nval,setnval]=useState(0);
 const [ninfo,setninfo]=useState("");
 const [dId,setdId]=useState("");
 const [eid,seteid]=useState("");
+const [etypespresent,setpretype]=useState([]);
 var givendaysum=0;
   const onChange = (e)=>{
     setdate(e.target.value);
@@ -51,6 +52,7 @@ const onNewinfoChange=(e)=>{
      fetchData();
      fetchmoData();
      fetchyrData();
+     fetchexpensetype();
 if(localStorage.getItem("day")){
   handleSubmit()
     }}
@@ -146,6 +148,24 @@ const updateexpense = async (e) => {
     fetchmoData();
     fetchyrData();
     setfsuc(true);
+}
+
+//fetch expense type
+async function fetchexpensetype() {
+  setfsuc(false);
+  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/fetch_User_Expense_Types", {
+ method: 'POST',
+ headers: {
+     'Content-Type': 'application/json'
+ },
+ 
+ body: JSON.stringify({token: localStorage.getItem("token")})
+});
+const json = await response.json()
+if(json.message=="ok"){
+  setpretype(json.data.expense_Type_List);
+}
+setfsuc(true);
 }
 
 //delete particular expense
@@ -259,6 +279,22 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
               <option value="Food">Food</option>
               <option value="Travel">Travel</option>
               <option value="Others">Others</option>
+              {(()=>{
+        let rows = [];
+        if(etypespresent.length==0)
+        {
+          rows.push(
+            <option>You can add list</option>
+            );
+        }
+        else{
+        for (let i = 0; i < etypespresent.length; i++) {
+          rows.push(
+            <option value={etypespresent[i].expense_Type} key={i}>{etypespresent[i].expense_Type}</option>
+            );
+        }}
+        return rows;
+    })()}
             </select>
             <label  htmlFor="floatingInputGrid">Expense Type</label>
          </div>
@@ -338,6 +374,22 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
               <option value="Food">Food</option>
               <option value="Travel">Travel</option>
               <option value="Others">Others</option>
+              {(()=>{
+        let rows = [];
+        if(etypespresent.length==0)
+        {
+          rows.push(
+            <option>You can add list</option>
+            );
+        }
+        else{
+        for (let i = 0; i < etypespresent.length; i++) {
+          rows.push(
+            <option value={etypespresent[i].expense_Type} key={i}>{etypespresent[i].expense_Type}</option>
+            );
+        }}
+        return rows;
+    })()}
             </select>
             <label  htmlFor="floatingInputGrid">Expense Type</label>
            </div>
@@ -366,10 +418,38 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
      </div>
      </div>
      <div className='col-md-4 col-sm-12'>
-        {(window.screen.width>500)&&<div className='mainf'>
-        <Link to="/year"> <div className='circstat'><h5>{ysum}</h5><h4>Expense of year</h4></div></Link>
-        <Link to="/month"><div className='circstat'><h5>{msum}</h5><h4>Expense of month</h4></div></Link>
-        <div className='circstat'><h5>{dsum}</h5><h4>Expense of day</h4></div>
+     {(window.screen.width>500)&&<div className='mainf expensestat rounded'>
+        <Link to="/year"><div className='circstat row g-3' >
+          <div className='col circstatcenter numstats'>
+            <h5>Rs. {ysum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of year</h4>
+            </div>
+          </div>
+          </Link>
+          <p className=' dividerhz'></p> 
+          <Link to="/year"><div className='circstat row g-3' >
+          <div className='col circstatcenter numstats'>
+            <h5>Rs. {msum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of month</h4>
+            </div>
+          </div>
+          </Link>
+          <p className=' dividerhz'></p>
+          <div className='circstat row g-3' >
+          <div className='col circstatcenter numstats'>
+            <h5>Rs. {dsum}</h5>
+            </div>
+          <p className='col dividervt'></p>
+          <div className='col circstatcenter'>
+            <h4>Expense of day</h4>
+            </div>
+          </div>
         </div>}
      </div>
      </div>

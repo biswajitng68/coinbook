@@ -1,6 +1,6 @@
 
 body{
-    background: linear-gradient(266deg, #7c4568, #2b5186) no-repeat center center fixed #000; 
+    background: linear-gradient(266deg, #22161e, #000000) no-repeat center center fixed #000; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -31,8 +31,8 @@ body{
   padding: 1em;
 margin-bottom: 1em;
 border: 1px solid #eee;
-background-color: #0d87b629;
-box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+background-image: linear-gradient(90deg,#c6fff1,#9d00ff);
+box-shadow: 3px 3px 4px rgba(239, 177, 177, 0.998);
 border-radius: 5%;
 width: 400px;
 margin-left: 10px;
@@ -46,7 +46,7 @@ input{
   background-color: #61dafb;
 }
 #navs{
-  background-image: linear-gradient(86deg, #83fff2, #00edbf00);
+  background-image: linear-gradient(86deg, #83fff2, #00edbe9b);
 }
 /* .mainf{
   border: 1px solid #eee;
@@ -60,7 +60,7 @@ td, th {
 table {
   border: 1px solid #d6f4c4;
   /* background-color: #30c58f4f; */
-  box-shadow: 0 3px 4px rgb(0 255 229);
+  box-shadow: 4px 3px 4px rgb(0 255 229);
   width: 100%;
   color: #dbf3c1;
   text-align: center;
@@ -114,10 +114,23 @@ text-decoration: none;
   padding: 0%;
   margin-left: 20px;
   margin-right: 20px;
+  box-shadow: 0 3px 4px rgb(0 255 229);
 }
 .circstatcenter{
-  margin-top: 80px;
+  padding-top: 80px;
+  margin: 10px;
+  color: #99ffcb;
   /* background-image: linear-gradient(73deg, #bd05ff, #00bbff); */
+}
+.numstats{
+ border-radius: 100%;
+ border: 2px solid; 
+ border-bottom-color: #0040ff;
+ border-top-color: #7dfcd5;
+ border-left-color: #ff01ab;
+ border-right-color:#ab00ff;
+ color: #00ffea;
+
 }
 
 .circstat:hover{
@@ -209,10 +222,11 @@ margin-top: 10vh;
 margin-bottom: 5vh;
 margin-left: 20px;
 margin-right: 20px;
+max-width: fit-content;
 box-shadow: inset 0.2em 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3), 0em 0em 0.2em 0.2em rgba(0, 0, 0, 0.3);
 }
 .profelement{
-  margin: 1.6em;
+  margin-bottom: 1.5em;
   font-size:1.2em;
   color: #dbf3c1;
 }
@@ -236,5 +250,5 @@ box-shadow: inset 0.2em 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3), 0em 0em 0.2em 0.2e
 .expensestat{
   /* background-color: #f9f7f7; */
   border: 1px solid #00ffb1 ;
-
+  box-shadow: 0px 0px 5px #2a3cad;
 }

@@ -14,6 +14,8 @@ import Monthstat from './components/Monthstat';
 import History from './components/History';
 import Profile from './components/Profile';
 import Passwordchange from './components/Passwordchange';
+import Otpgen from './components/Otpgen';
+import Otpverify from './components/Otpvrify';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,6 +35,8 @@ root.render(
         <Route path="history" element={<History />} />
         <Route path="profile" element={<Profile />} />
         <Route path="passchange" element={<Passwordchange />} />
+        <Route path="otpgen" element={<Otpgen />} />
+        <Route path="otpver" element={<Otpverify />} />
         </Route>
       </Routes>
 
