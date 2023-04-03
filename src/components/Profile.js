@@ -7,7 +7,6 @@ function Profile() {
     const [fetchsuccess,setfsuc]=useState(true);
     const [profdet,setprofdet]=useState([]);
     const [extypead,setextypead]=useState();
-    const [pass,setpass]=useState();
     const [etypespresent,setpretype]=useState([]);
     // const [newpass,setnpass]=useState();
     // const [passchangepossible,setchangeposs]=useState(false);
@@ -78,28 +77,7 @@ alert(json.message)}
 setfsuc(true);
 }
 
-//verify old password
-async function verifypass() {
-  setfsuc(false);
-  console.log(extypead);
-  const response = await fetch("https://coin-book-app-backend-mern4.onrender.com/user/verify_User_Password", {
- method: 'POST',
- headers: {
-     'Content-Type': 'application/json'
- },
- 
- body: JSON.stringify({token: localStorage.getItem("token"),password:pass})
-});
-const json = await response.json()
-console.log(json)
-if(json.message=="Correct Password"){
-  navigate("../passchange")
-}
-else{
-  alert(json.message||json.error)
-}
-setfsuc(true);
-}
+
    
     return(
         <>
@@ -156,27 +134,8 @@ setfsuc(true);
         </div>
         </div>
         <div className='d-flex justify-content-between'>
-        <button className='btn btn-dark' onClick={()=>{localStorage.clear(); navigate("../");}} >log out</button>
-        <button className='btn btn-dark' data-bs-toggle="modal" data-bs-target="#exampleModal">Change password</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" id='mymodal'>
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Enter old password</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div className='form-floating my-2'>
-            <input type="password" className="form-control" id="floatingInputGrid" onChange={(e)=>{e.preventDefault();setpass(e.target.value)}}  value={pass}/>
-           <label htmlFor="floatingInputGrid">Old password</label>
-           </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={verifypass}>Verify</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <button className='btn btn-danger' onClick={()=>{localStorage.clear(); navigate("../");}} >log out</button>
+
         </div>
         </div>
         </div>

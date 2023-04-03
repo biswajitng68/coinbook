@@ -72,7 +72,11 @@ async function typewiseyrdata(){
    setfsuc(true);
 }
 //------------------------------------------------------
-const  options= {
+let val=true;
+if(window.screen.width<450)
+   val=false;
+const  options2= {
+  maintainAspectRatio:val,
   plugins:{
     indexAxis:'y',
     legend:{
@@ -122,13 +126,15 @@ const progressBar={
     //ctx.fillRect(10,10,1000,100);
     ctx.beginPath();
     //ctx.fillRect(x.getPixelForValue(i)-(barwidth/2),top+5,barwidth,height-20);
-    ctx.arc(x.getPixelForValue(i), top+5, 6, Math.PI, 2*Math.PI);
-    ctx.arc(x.getPixelForValue(i), top+5+height-10, 6, 0, Math.PI);
+    
+   
+    ctx.arc(x.getPixelForValue(i), top+(barwidth/2),(barwidth/2) , Math.PI, 2*Math.PI);//  chilo val-> (barwidth/2)
+    ctx.arc(x.getPixelForValue(i), top+height-(barwidth/2),(barwidth/2), 0, Math.PI);
     ctx.fill();
     }
   }
 };
-  const labels = ["January", "February", "March", "April", "May", "June","July","August","September","October","November","December"];
+  const labels = ["Jan", "Feb", "Mar", "Apr", "May", "June","July","Aug","Sep","Oct","Nov","Dec"];
     const data = {
       labels: labels,
       datasets: [
@@ -153,24 +159,49 @@ const progressBar={
       datasets: [
         {
           label: "Typewise expenses",
-          backgroundColor: colortypes,
+         
           borderColor: "rgb(155, 199, 132)",
           data: typesumst,
+          backgroundColor: [
+            'rgba(255, 26, 104, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(7, 236, 91, 1)'
+          ],
+          borderWidth: 0,
+          cutout:"80%",
+          radius:"70%",
+          //animateRotate:true,
+          //borderSkipped:false,
+          borderRadius:9,
+          offset:5,
+          barPercentage:0.2,
+          categoryPercentage:0.8
         },
       ],
     }; 
     
     const options1 = {
-        plugins: {
-          legend: {
-            position: 'right',
-            labels: {
-              usePointStyle: true,
-              pointStyle: 'circle'
+      maintainAspectRatio:false,
+        plugins:{
+          indexAxis:'y',
+          legend:{
+            //display:false,
+           
+            position:'left',
+            labels:{
+              color: 'rgba(13, 245, 233, 0.8)',
+              usePointStyle:true,
+              pointStyle:'circle'
             }
           }
-        }
+        },
       }
+    
+   
       
 
     return(
@@ -201,10 +232,10 @@ const progressBar={
       })()}
                 </div>
             </div>
-        <div className=' col col-md-6 col-lg-6 col-sm-12'>
-          <div className='chartstat shadow-lg p-4 rounded'><Bar  data={data} options={options} plugins={[progressBar]}/></div>
+        <div className=' col col-md-6 col-lg-6 col-sm-12 yrstatspmar'>
+          <div className='chartstat shadow-lg p-2 rounded'><Bar  data={data} options={options2} plugins={[progressBar]}/></div>
           
-          <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options1={options1}  /></div></div>
+          <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options={options1}  /></div></div>
         </div>
         </div>
         </>

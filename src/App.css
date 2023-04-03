@@ -165,10 +165,17 @@ margin-top:40px ;
   background-color: #0b0b0b;
   border: 2px solid rgba(85, 239, 234, 0.911);
   /* box-shadow: inset 4px 4px 4px rgba(3, 132, 244, 0.725); */
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flexbox;
   justify-content: center;
   /* margin-left: 30px; */
+  color: #0040ff;
+}
+@media only screen and (max-width: 600px) {
+  .yrstatspmar{
+    padding: 0px;
+  }
 }
 #mycalmonth{
 text-align: center;
