@@ -5,7 +5,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import Log from './components/Log';
 import Sign from './components/Sign';
-import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route,Navigate, HashRouter } from "react-router-dom";
 import Home from './components/Home';
 import About from './components/About';
 import Main from './components/Main';
@@ -21,7 +21,7 @@ import Otpverify from './components/Otpvrify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter>
 
       <Routes>
         <Route element={<App/>}>
@@ -40,7 +40,7 @@ root.render(
         </Route>
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 

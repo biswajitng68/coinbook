@@ -6,81 +6,57 @@ import '../App.css';
 function About() {
   return (
     <>
-  <div className='container about my-3'>
-  The insurance industry is expanding quickly 
-  alongside the digital transformation in banking and 
-  business. The insurance industry has experienced 
-  enormous expansion, which has created numerous 
-  opportunities for young hopefuls to advance their careers. 
-  An insurance provider in the public sector owned by the Indian 
-  government is the General Insurance Corporation of India (GIC), 
-  which has its headquarters in Mumbai. To find qualified applicants 
-  for the efficient operation of its organisational activities, the GIC 
-  administers a variety of exams. One such test is held by the General 
-  Insurance Corporation of India for the position of Assistant Manager Scale I. 
-  The candidates will be selected based on how well they perform on the written test, 
-  in the group discussion, and in the interview.
-  <div >
-  The insurance industry is expanding quickly 
-  alongside the digital transformation in banking and 
-  business. The insurance industry has experienced 
-  enormous expansion, which has created numerous 
-  opportunities for young hopefuls to advance their careers. 
-  An insurance provider in the public sector owned by the Indian 
-  government is the General Insurance Corporation of India (GIC), 
-  which has its headquarters in Mumbai. To find qualified applicants 
-  for the efficient operation of its organisational activities, the GIC 
-  administers a variety of exams. One such test is held by the General 
-  Insurance Corporation of India for the position of Assistant Manager Scale I. 
-  The candidates will be selected based on how well they perform on the written test, 
-  in the group discussion, and in the interview.
+    <div className='aboupage'>
+      <div className='container'>
+    <section id="about">
+
+    <h2>Get to Know About Us & Our Work </h2>
+
+    <div class="about_work abdiv">
+      <h2>CoinBook Brief</h2>
+      <ul>
+        <li>
+          CoinBook is a web based application to track our daily life expenses
+          in more disciplined and expressive manner.
+        </li>
+        <li>Developed using the demanding MERN Stack Technologies</li>
+      </ul>
+    </div>
+
+    <div class="about_developed abdiv">
+      <h2>Meet Developers Team</h2>
+      <ul>
+        <li>Biswajit Nag --- Frontend Developer</li>
+        <li>Ramkrishna Sarkar --- Backend Developer</li>
+        <li>Rajib Thakur --- Backend Developer</li>
+        <li>Debjyoti Sardar --- Graphic Designer (Home Page)</li>
+        
+      </ul>
+    </div>
+
+    <div class="about_github abdiv">
+      <h2>GitHub Repository Links</h2>
+      <ul>
+        <li>
+          <Link to="https://github.com/biswajitng68/coinbook">FrontEnd_Code</Link>
+        </li>
+        <li>
+          <Link to="https://github.com/RAJIB-THAKUR/coinBook_Backend">BackEnd_Code</Link>
+        </li>
+      </ul>
+    </div>
+
+    <div class="about_contact abdiv">
+      <h2>Contact Us</h2>
+      <h6>Email : coinbook000@gmail.com</h6>
+      <h6>Mobile : xxxxxxxx98</h6>
+      <h6>Address : West Bengal, India</h6>
+    </div>
+
+   
+
+  </section>
   </div>
-  <div >
-  The insurance industry is expanding quickly 
-  alongside the digital transformation in banking and 
-  business. The insurance industry has experienced 
-  enormous expansion, which has created numerous 
-  opportunities for young hopefuls to advance their careers. 
-  An insurance provider in the public sector owned by the Indian 
-  government is the General Insurance Corporation of India (GIC), 
-  which has its headquarters in Mumbai. To find qualified applicants 
-  for the efficient operation of its organisational activities, the GIC 
-  administers a variety of exams. One such test is held by the General 
-  Insurance Corporation of India for the position of Assistant Manager Scale I. 
-  The candidates will be selected based on how well they perform on the written test, 
-  in the group discussion, and in the interview.
-  </div>
-  <div >
-  The insurance industry is expanding quickly 
-  alongside the digital transformation in banking and 
-  business. The insurance industry has experienced 
-  enormous expansion, which has created numerous 
-  opportunities for young hopefuls to advance their careers. 
-  An insurance provider in the public sector owned by the Indian 
-  government is the General Insurance Corporation of India (GIC), 
-  which has its headquarters in Mumbai. To find qualified applicants 
-  for the efficient operation of its organisational activities, the GIC 
-  administers a variety of exams. One such test is held by the General 
-  Insurance Corporation of India for the position of Assistant Manager Scale I. 
-  The candidates will be selected based on how well they perform on the written test, 
-  in the group discussion, and in the interview.
-  </div>
-  <div >
-  The insurance industry is expanding quickly 
-  alongside the digital transformation in banking and 
-  business. The insurance industry has experienced 
-  enormous expansion, which has created numerous 
-  opportunities for young hopefuls to advance their careers. 
-  An insurance provider in the public sector owned by the Indian 
-  government is the General Insurance Corporation of India (GIC), 
-  which has its headquarters in Mumbai. To find qualified applicants 
-  for the efficient operation of its organisational activities, the GIC 
-  administers a variety of exams. One such test is held by the General 
-  Insurance Corporation of India for the position of Assistant Manager Scale I. 
-  The candidates will be selected based on how well they perform on the written test, 
-  in the group discussion, and in the interview.
-  </div>
-  
   </div>
 <Outlet/>
 </>
