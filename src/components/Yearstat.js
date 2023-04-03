@@ -71,20 +71,80 @@ async function typewiseyrdata(){
    settypesum(typesums);
    setfsuc(true);
 }
+//------------------------------------------------------
+const  options= {
+  plugins:{
+    indexAxis:'y',
+    legend:{
+      //display:false
+    }
+  },
+  scales: {
+    x: {
+      beginAtZero: true,
+      grid:{
+          display:false,
+          drawBorder:false
+      },
+      ticks:{
+        //display:false
+        color: (c) => { return 'rgba(13, 245, 233, 0.8)';},
+      }
+    },
+    y: {
+      beginAtZero: true,
+      grid:{
+          display:false,
+          drawBorder:false
+      },
+      ticks:{
+       // display:false
+       color: (c) => { return 'rgba(13, 245, 233, 0.8)';},
+      }
+    }
+  }
+};
 
 
+//-------------------------------------------------------
 
+const progressBar={
+  id:'progressBar',
+  beforeDatasetsDraw(chart,pluginOptions){
+    const {ctx,chartArea:{bottom,height,left,right,top,width},scales:{x,y}}=chart;
+    const barwidth=(width/x.ticks.length*data.datasets[0].barPercentage*data.datasets[0].categoryPercentage);
+   // console.log("height : ");
+   // console.log(height);
+    for(let i=0;i<31;i++)
+    {
+    ctx.save();
+    ctx.fillStyle="rgba(192, 204, 250, 0.2)";
+    //ctx.fillRect(10,10,1000,100);
+    ctx.beginPath();
+    //ctx.fillRect(x.getPixelForValue(i)-(barwidth/2),top+5,barwidth,height-20);
+    ctx.arc(x.getPixelForValue(i), top+5, 6, Math.PI, 2*Math.PI);
+    ctx.arc(x.getPixelForValue(i), top+5+height-10, 6, 0, Math.PI);
+    ctx.fill();
+    }
+  }
+};
   const labels = ["January", "February", "March", "April", "May", "June","July","August","September","October","November","December"];
     const data = {
       labels: labels,
       datasets: [
         {
           label: "Expense vs month",
-          backgroundColor: "rgb(25, 99, 132)",
+          backgroundColor: "rgba(57, 99, 252, 1)",
           borderColor: "rgb(155, 199, 132)",
           data: yrdetail,
+          borderWidth: 0,
+          borderSkipped:false,
+          borderRadius:5,
+          barPercentage:0.3,
+          categoryPercentage:0.8
         },
       ],
+
     }; 
     console.log(typesst);
     console.log(typesumst);
@@ -99,7 +159,8 @@ async function typewiseyrdata(){
         },
       ],
     }; 
-    const options = {
+    
+    const options1 = {
         plugins: {
           legend: {
             position: 'right',
@@ -110,6 +171,7 @@ async function typewiseyrdata(){
           }
         }
       }
+      
 
     return(
         <>
@@ -140,8 +202,9 @@ async function typewiseyrdata(){
                 </div>
             </div>
         <div className=' col col-md-6 col-lg-6 col-sm-12'>
-          <div className='chartstat shadow-lg p-2 rounded'><Bar  data={data} /></div>
-          <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options={options}  /></div></div>
+          <div className='chartstat shadow-lg p-4 rounded'><Bar  data={data} options={options} plugins={[progressBar]}/></div>
+          
+          <div className='chartstat shadow-lg p-2  rounded'><p>Typewise expenses</p><div className='chartsp'><Doughnut  data={datatypewise} options1={options1}  /></div></div>
         </div>
         </div>
         </>

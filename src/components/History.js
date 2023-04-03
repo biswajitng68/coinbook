@@ -430,7 +430,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
           </div>
           </Link>
           <p className=' dividerhz'></p> 
-          <Link to="/year"><div className='circstat row g-3' >
+          <Link to="/month"><div className='circstat row g-3' >
           <div className='col circstatcenter numstats'>
             <h5>Rs. {msum}</h5>
             </div>
