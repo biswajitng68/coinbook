@@ -69,14 +69,14 @@ function Sign() {
         <form onSubmit={handleSubmit}>
         <div  style={lst}>
             <div className="wrap" style={nst}>
-                <h2  style={st}>Sign in</h2>
+                <h2  style={st}>Sign up</h2>
             <fieldset>
             <div className="form-floating mb-3">
-  <input  className="form-control" id="floatingInput"  name='name' value={credentials.name} onChange={onChange}/>
+  <input  className="form-control" id="floatingInput"  name='name'placeholder="name" value={credentials.name} onChange={onChange}/>
   <label htmlFor="floatingInput">Name</label>
 </div>
 <div className="form-floating mb-3">
-  <input  className="form-control" id="floatingInput"  name='mobile' value={credentials.mobile} onChange={onChange}/>
+  <input  className="form-control" id="floatingInput"  name='mobile'placeholder="mobile" value={credentials.mobile} onChange={onChange}/>
   <label htmlFor="floatingInput">Mobile</label>
 </div>
         <div className="form-floating mb-3">

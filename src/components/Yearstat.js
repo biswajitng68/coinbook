@@ -72,9 +72,12 @@ async function typewiseyrdata(){
    setfsuc(true);
 }
 //------------------------------------------------------
-let val=true;
-if(window.screen.width<450)
+let val=true,rad=6;
+
+if(window.screen.width<450){
    val=false;
+  rad=3.2;
+  }
 const  options2= {
   maintainAspectRatio:val,
   plugins:{
@@ -128,8 +131,8 @@ const progressBar={
     //ctx.fillRect(x.getPixelForValue(i)-(barwidth/2),top+5,barwidth,height-20);
     
    
-    ctx.arc(x.getPixelForValue(i), top+(barwidth/2),(barwidth/2) , Math.PI, 2*Math.PI);//  chilo val-> (barwidth/2)
-    ctx.arc(x.getPixelForValue(i), top+height-(barwidth/2),(barwidth/2), 0, Math.PI);
+    ctx.arc(x.getPixelForValue(i), top+(rad),(rad) , Math.PI, 2*Math.PI);//  chilo val-> (barwidth/2)
+    ctx.arc(x.getPixelForValue(i), top+height-(rad),(rad), 0, Math.PI);
     ctx.fill();
     }
   }

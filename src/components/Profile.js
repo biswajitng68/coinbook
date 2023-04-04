@@ -104,18 +104,17 @@ setfsuc(true);
   <ul class="dropdown-menu">
     {(()=>{
         let rows = [];
-        if(etypespresent.length==0)
-        {
-          rows.push(
-            <li><button class="dropdown-item" type="button" key={100}>Nothing here</button></li>
-            );
-        }
-        else{
+        rows.push(
+          <><li><button class="dropdown-item" type="button" key={100}>General</button></li>
+          <li><button class="dropdown-item" type="button" key={101}>Food</button></li>
+          <li><button class="dropdown-item" type="button" key={102}>Travel</button></li>
+          <li><button class="dropdown-item" type="button" key={103}>Others</button></li>
+          </>);
         for (let i = 0; i < etypespresent.length; i++) {
           rows.push(
             <li><button class="dropdown-item" type="button" key={i}>{etypespresent[i].expense_Type}</button></li>
             );
-        }}
+        }
         return rows;
     })()}
   </ul>

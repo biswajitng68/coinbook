@@ -284,7 +284,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
         if(etypespresent.length==0)
         {
           rows.push(
-            <option>You can add list</option>
+            <option>/--Add--/</option>
             );
         }
         else{
@@ -379,7 +379,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
         if(etypespresent.length==0)
         {
           rows.push(
-            <option>You can add list</option>
+            <option>/--Add--/</option>
             );
         }
         else{

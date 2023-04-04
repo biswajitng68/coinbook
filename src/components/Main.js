@@ -231,7 +231,7 @@ setfsuc(true);
         if(etypespresent.length==0)
         {
           rows.push(
-            <option>You can add list</option>
+            <option>/--Add--/</option>
             );
         }
         else{
@@ -305,7 +305,7 @@ setfsuc(true);
         if(etypespresent.length==0)
         {
           rows.push(
-            <option>You can add list</option>
+            <option>/--Add--/</option>
             );
         }
         else{

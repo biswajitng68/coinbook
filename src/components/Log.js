@@ -79,7 +79,7 @@ function Log() {
 <button className='btn  btn-primary'>Submit</button>
 </div>
 <div className='d-grid gap-2 my-4'>
-<Link to="/sign"><button className='btn  btn-dark'>Sign in</button></Link>
+<Link to="/sign"><button className='btn  btn-dark'>Sign up</button></Link>
 </div>
 </fieldset>
 </div>
