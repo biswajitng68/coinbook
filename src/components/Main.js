@@ -121,7 +121,7 @@ const updateexpense = async (e) => {
       body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid, new_field:ntype, new_value:nval, new_info:ninfo})
   });
   const json = await response.json()
-  console.log(json);
+  alert(json.message);
   fetchData();
   fetchmoData();
   fetchyrData();
@@ -181,7 +181,7 @@ setfsuc(true);
             body: JSON.stringify({token: localStorage.getItem("token"), field: expense.type, value,month:month,year:year,day:day,info:expense.info})
         });
         const json = await response.json()
-        console.log(json);
+        alert(json.message);
         fetchdayData();
         fetchmoData();
         fetchyrData();
@@ -296,7 +296,7 @@ setfsuc(true);
            </div>
         <div className='form-floating my-2'>
            <select class="form-select" id="floatingInputGrid" onChange={onNewtypeChange} name="ntype" value={ntype}>
-              <option value="General">Genral</option>
+              <option value="General">General</option>
               <option value="Food">Food</option>
               <option value="Travel">Travel</option>
               <option value="Others">Others</option>
@@ -383,7 +383,7 @@ setfsuc(true);
      </div>
      </>
        :
-       <div>sorry you have to login first</div>
+       navigate("../")
        }
 <Outlet/>
         </>

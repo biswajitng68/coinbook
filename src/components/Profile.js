@@ -12,7 +12,7 @@ function Profile() {
     // const [passchangepossible,setchangeposs]=useState(false);
     useEffect(()=>{
         if(!localStorage.getItem("token"))
-        navigate("./")
+        navigate("../")
         fetchprofdetail();
         fetchexpensetype();
     },[])

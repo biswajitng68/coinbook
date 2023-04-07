@@ -124,6 +124,7 @@ const expensehandleSubmit = async (e) => {
         body: JSON.stringify({token: localStorage.getItem("token"), field: expense.type, value,month:month,year:year,day:day,info:expense.info})
     });
     const json = await response.json()
+    alert(json.message);
     handleSubmit(e);
     fetchData();
     fetchmoData();
@@ -143,6 +144,7 @@ const updateexpense = async (e) => {
         body: JSON.stringify({token: localStorage.getItem("token"), date_id:dId, expense_id:eid, new_field:ntype, new_value:nval, new_info:ninfo})
     });
     const json = await response.json()
+    alert(json.message);
     handleSubmit();
     fetchData();
     fetchmoData();
@@ -455,7 +457,7 @@ if(yyear<parseInt(year)||(yyear==parseInt(year)&&(mmonth<parseInt(month)||(mmont
      </div>
      </>
        :
-       <div>sorry you have to login first</div>
+       navigate("../")
        }
 <Outlet/>
         </>
