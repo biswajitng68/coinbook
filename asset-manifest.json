@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/coinbook/static/css/main.ccc3eefb.css",
-    "main.js": "/coinbook/static/js/main.6c2358ef.js",
+    "main.js": "/coinbook/static/js/main.80605abf.js",
     "static/js/787.28cb0dcd.chunk.js": "/coinbook/static/js/787.28cb0dcd.chunk.js",
     "static/media/fpvideo.mp4": "/coinbook/static/media/fpvideo.d12de47ce4a4ce8ec25d.mp4",
     "static/media/back.png": "/coinbook/static/media/back.1d49b091d2c858a21a72.png",
@@ -10,11 +10,11 @@
     "static/media/Coin Bookph.mp4": "/coinbook/static/media/Coin Bookph.a06c14efdcef10e41642.mp4",
     "index.html": "/coinbook/index.html",
     "main.ccc3eefb.css.map": "/coinbook/static/css/main.ccc3eefb.css.map",
-    "main.6c2358ef.js.map": "/coinbook/static/js/main.6c2358ef.js.map",
+    "main.80605abf.js.map": "/coinbook/static/js/main.80605abf.js.map",
     "787.28cb0dcd.chunk.js.map": "/coinbook/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ccc3eefb.css",
-    "static/js/main.6c2358ef.js"
+    "static/js/main.80605abf.js"
   ]
 }
